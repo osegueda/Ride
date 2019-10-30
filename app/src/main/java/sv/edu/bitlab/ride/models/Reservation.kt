@@ -1,0 +1,9 @@
+package sv.edu.bitlab.unicomer.models
+
+ data class Reservation(var available:Boolean?=false,
+                        var date:String?="",
+                        var id:String?="",
+                        var pplsize:Int?=0,
+                        var round:Int?=0,
+                        var schedule:String?="",
+                        var users:ArrayList<String> =ArrayList())
