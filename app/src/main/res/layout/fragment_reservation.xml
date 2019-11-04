@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.locationComponents.SettingsFragment">
+    tools:context=".fragments.reservationComponents.ReservationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_reservation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/text_settings_hello" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

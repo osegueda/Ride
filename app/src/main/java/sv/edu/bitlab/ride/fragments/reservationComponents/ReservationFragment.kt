@@ -1,4 +1,4 @@
-package sv.edu.bitlab.ride.fragments.locationComponents
+package sv.edu.bitlab.ride.fragments.reservationComponents
 
 import android.content.Context
 import android.os.Build
@@ -14,9 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
 
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
@@ -28,18 +26,18 @@ import java.time.format.DateTimeFormatter
 
 
 @Suppress("UNCHECKED_CAST")
-class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListener{
+class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemListener{
 
 
     private var listener: OnFragmentInteractionListener? = null
     private var firestoredb =FirebaseDatabase.getInstance().getReference("reservations")
     private var reservations:ArrayList<Reservation> ?=null
     private var active_reservations:ArrayList<Reservation> ?=null
-    private var db= FirebaseFirestore.getInstance()
+   // private var db= FirebaseFirestore.getInstance()
     private var listView: RecyclerView?=null
     private lateinit  var today_date:String
-    private var user="Saul"
-     lateinit var  active_round:String
+    private var user="Moises"
+    lateinit var  active_round:String
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -58,7 +56,7 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view=inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val view=inflater.inflate(R.layout.fragment_reservation, container, false)
         return view
 
 
@@ -99,8 +97,8 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         val formatted = current.format(formatter)
         today_date=formatted
-
         Log.d("DATE", formatted)
+
 
 
 
@@ -152,7 +150,7 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
 
     }
 
-    fun getActiveReservation(){
+    private fun getActiveReservation(){
 
         lateinit var idActiveRound:HashMap<String,String>
             firestoredb.child(today_date).child("active_rounds").addValueEventListener(object : ValueEventListener {
@@ -161,11 +159,11 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
                         active_reservations?.clear()
                         dataSnapshot.children.forEach {reservation->
                              idActiveRound= reservation.value!!as HashMap<String,String>
-                            active_round=idActiveRound.get("id_round")!!
-                            Log.d("ACTIVE","${idActiveRound.get("id_round")}")
+                            active_round= idActiveRound["id_round"]!!
+                            Log.d("ACTIVE","${idActiveRound["id_round"]}")
 
                         }
-                        val idRound=idActiveRound.get("id_round")
+                        val idRound= idActiveRound["id_round"]
                         active_reservations=reservations?.filter {reservation ->
 
                             reservation.id.equals(idRound)
@@ -193,13 +191,13 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
 
     fun writeFirstRoundOfDay(){
 
-        val reservationOfDay = Reservation(true,today_date,"",11,1,"7:00AM-9:00AM")
+        val reservationOfDay = Reservation(true,today_date,"",11,1,"7:00AM-9:00AM","available")
         firestoredb.child("$today_date/rounds").push().setValue(reservationOfDay)
 
     }
     fun writeNewRound(){
-        val roundNumber= active_reservations!!.get(0).round!!+1
-        val newround = Reservation(true,today_date,"",11,roundNumber,"7:00AM-9:00AM")
+        val roundNumber= active_reservations!![0].round!!+1
+        val newround = Reservation(true,today_date,"",11,roundNumber,"7:00AM-9:00AM","available")
         firestoredb.child("$today_date/active_rounds").removeValue()
         firestoredb.child("$today_date/rounds").push().setValue(newround)
 
@@ -208,7 +206,7 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
     }
 
 
-    fun confirmReservation() {
+    private fun confirmReservation() {
 
         val alertDialog = AlertDialog.Builder(requireContext())
             .setTitle("Confirmar Reservacion")
@@ -218,50 +216,49 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
                 pushReservation()
 
 
-        }
+            }
 
-        alertDialog.setNegativeButton("Cancelar") { _, _ ->
+            .setNegativeButton("Cancelar") { _, _ ->
 
-            Toast.makeText(requireContext(), "No", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "No", Toast.LENGTH_LONG).show()
 
-        }
+            }
         alertDialog.show()
     }
 
-    fun checkReservation():Boolean{
+    private fun deleteReservation() {
 
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setTitle("Eliminar Reservacion")
+            .setMessage("Desea Elimnar su reservacion?")
+            .setPositiveButton("Eliminar") { _, _ ->
 
-        val state= reservations?.any { x->x.users.contains(user)}
-       // val size=active_reservations!!.get(0).pplsize
-        Log.d("STATE","$state")
-      /*  if (!state!!){
-
-            if (size!!.toInt() > 1){
-                active_reservations?.get(0)?.users?.add(user)
-                active_reservations?.get(0)?.pplsize=size-1
-            }else{
-                if (size.toInt()== 1){
-                    active_reservations?.get(0)?.pplsize=size-1
-                    active_reservations?.get(0)?.users?.add(user)
-                    active_reservations?.get(0)?.available=false
-                    writeNewRound()
-                }
+               updateUsers()
 
 
             }
 
-            Log.d("ACTIVE RESERV","$active_reservations")
-        }*/
+            .setNegativeButton("Cancelar") { _, _ ->
+
+                Toast.makeText(requireContext(), "No", Toast.LENGTH_LONG).show()
+
+            }
+        alertDialog.show()
+    }
+
+    private fun checkReservation():Boolean{
+
+        val state= reservations?.any { x->x.users.contains(user)}
+
 
         return  state!!
     }
-     fun pushReservation() {
+     private fun pushReservation() {
         firestoredb.child(today_date).child("rounds").child(active_round).runTransaction(object : Transaction.Handler {
             override fun doTransaction(mutableData: MutableData): Transaction.Result {
 
                 val p = mutableData.getValue(Reservation::class.java)
-                    Log.d("CHILD","$p")
-                    ?: return Transaction.success(mutableData)
+                Log.d("CHILD","$p")
 
                 if (p!!.users.contains(user)) {
 
@@ -302,14 +299,48 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
         })
     }
 
+    private fun updateUsers() {
+        firestoredb.child(today_date).child("rounds").child(active_round).runTransaction(object : Transaction.Handler {
+            override fun doTransaction(mutableData: MutableData): Transaction.Result {
+
+                val p = mutableData.getValue(Reservation::class.java)
+                Log.d("CHILD","$p")
+
+                if (p!!.users.contains(user)) {
+
+                    p.pplsize=p.pplsize!!+1
+                    p.users.remove(user)
+                    p.available=true
+                } else {
+                  Log.d("UPDATE","NO CONTIENE USER")
+
+
+                }
+
+                // Set value and report transaction success
+                mutableData.value = p
+                return Transaction.success(mutableData)
+            }
+
+            override fun onComplete(
+                databaseError: DatabaseError?,
+                b: Boolean,
+                dataSnapshot: DataSnapshot?
+            ) {
+                // Transaction completed
+                //   Log.d("TRANSACTION COMPLETE", "postTransaction:onComplete:" + databaseError!!)
+            }
+        })
+    }
 
 
     override fun onItemClickReservation(position: Int) {
 
         if (checkReservation()){
 
-            Snackbar.make(requireView(), "you have already reserved", Snackbar.LENGTH_LONG)
-                .setAction("OK", {  }).show()
+           /* Snackbar.make(requireView(), "you have already reserved", Snackbar.LENGTH_LONG)
+                .setAction("OK") {  }.show()*/
+            deleteReservation()
 
         }else{
             Toast.makeText(requireContext(),"Card #$position",Toast.LENGTH_LONG).show()
@@ -332,7 +363,7 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
     companion object {
 
         @JvmStatic
-        fun newInstance() = DashboardFragment()
+        fun newInstance() = ReservationFragment()
 
     }
 }

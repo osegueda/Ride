@@ -1,7 +1,6 @@
-package sv.edu.bitlab.ride.fragments.locationComponents
+package sv.edu.bitlab.ride.fragments.historyComponents
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +11,7 @@ import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 
 
-class SettingsFragment : Fragment() {
+class RecordFragment : Fragment() {
 
 
     private var listener: OnFragmentInteractionListener? = null
@@ -27,7 +26,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        return inflater.inflate(R.layout.fragment_record, container, false)
     }
 
 
@@ -50,6 +49,6 @@ class SettingsFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() = SettingsFragment()
+        fun newInstance() = RecordFragment()
     }
 }

@@ -6,4 +6,5 @@ package sv.edu.bitlab.unicomer.models
                         var pplsize:Int?=0,
                         var round:Int?=0,
                         var schedule:String?="",
+                        var round_status:String?="",
                         var users:ArrayList<String> =ArrayList())

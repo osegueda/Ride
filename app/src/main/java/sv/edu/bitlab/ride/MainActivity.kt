@@ -2,21 +2,14 @@ package sv.edu.bitlab.ride
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
-import sv.edu.bitlab.ride.fragments.locationComponents.DashboardFragment
+import sv.edu.bitlab.ride.fragments.reservationComponents.ReservationFragment
 import sv.edu.bitlab.ride.fragments.locationComponents.LocationFragment
-import sv.edu.bitlab.ride.fragments.locationComponents.SettingsFragment
+import sv.edu.bitlab.ride.fragments.historyComponents.RecordFragment
+import sv.edu.bitlab.ride.fragments.notificationsFragment.NotificationFragment
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
-import sv.edu.bitlab.unicomer.models.Reservation
 
 class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
@@ -40,22 +33,29 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
         when(index){
 
-            FragmentsIndex.KEY_FRAGMENT_DASHBOARD->{
-                fragment=DashboardFragment.newInstance()
+            FragmentsIndex.KEY_FRAGMENT_RESERVATION->{
+                fragment= ReservationFragment.newInstance()
                 transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                     android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
             }
 
-            FragmentsIndex.KEY_FRAGMENT_SETTINGS->{
-                fragment = SettingsFragment.newInstance()
+            FragmentsIndex.KEY_FRAGMENT_RECORD->{
+                fragment = RecordFragment.newInstance()
                 transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
                     android.R.anim.fade_in, android.R.anim.fade_out)
 
             }
 
             FragmentsIndex.KEY_FRAGMENT_LOCATION->{
-                fragment = LocationFragment.newInstance()
+            fragment = LocationFragment.newInstance()
+            transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
+                android.R.anim.fade_in, android.R.anim.fade_out)
+
+
+        }
+            FragmentsIndex.KEY_FRAGMENT_NOTIFICATIONS->{
+                fragment = NotificationFragment.newInstance()
                 transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
                     android.R.anim.fade_in, android.R.anim.fade_out)
 
@@ -76,14 +76,14 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
     private  fun init(){
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.container_fragments, DashboardFragment.newInstance())
+            .add(R.id.container_fragments, ReservationFragment.newInstance())
             .commit()
 
-        this.findViewById<LinearLayout>(R.id.container_layout_dashboard)
+        this.findViewById<LinearLayout>(R.id.container_layout_notification)
             .setOnClickListener {
-                Toast.makeText(this, "Dashboard!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Reservations!", Toast.LENGTH_SHORT).show()
                 // listener?.listenTome()
-                listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_DASHBOARD)
+                listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_RESERVATION)
 
             }
 
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
             .setOnClickListener {
                 Toast.makeText(this, "Settings!", Toast.LENGTH_SHORT).show()
                 //listener?.listenTome()
-                listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_SETTINGS)
+                listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_RECORD)
             }
         this.findViewById<LinearLayout>(R.id.container_layout_location)
             .setOnClickListener{
@@ -99,6 +99,13 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
                 //listener?.listenTome()
                 listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_LOCATION)
             }
+        this.findViewById<LinearLayout>(R.id.container_layout_notifications)
+            .setOnClickListener{
+                Toast.makeText(this, "Notification!", Toast.LENGTH_SHORT).show()
+                //listener?.listenTome()
+                listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_NOTIFICATIONS)
+            }
+
 
 
 
