@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import com.google.firebase.messaging.FirebaseMessaging
 
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
@@ -73,6 +74,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         getAllReservations()
         getActiveReservation()
         checkReservation()
+
 
 
     }
@@ -187,6 +189,22 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
     }
 
+    fun notifications(){
+
+        Log.d("NOTIFICATION", "Subscribing to service topic")
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().subscribeToTopic("service")
+            .addOnCompleteListener { task ->
+                var msg = "SUSCRIPTION SUCCESS"
+                if (!task.isSuccessful) {
+                    msg = "SUSCRIPTION FAILED"
+                }
+                Log.d("NOTIFICATION", msg)
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            }
+        // [END subscribe_topics]
+
+    }
 
 
     fun writeFirstRoundOfDay(){

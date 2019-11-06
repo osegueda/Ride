@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import sv.edu.bitlab.ride.fragments.reservationComponents.ReservationFragment
 import sv.edu.bitlab.ride.fragments.locationComponents.LocationFragment
-import sv.edu.bitlab.ride.fragments.historyComponents.RecordFragment
+import sv.edu.bitlab.ride.fragments.recordComponents.RecordFragment
 import sv.edu.bitlab.ride.fragments.notificationsFragment.NotificationFragment
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
             .add(R.id.container_fragments, ReservationFragment.newInstance())
             .commit()
 
-        this.findViewById<LinearLayout>(R.id.container_layout_notification)
+        this.findViewById<LinearLayout>(R.id.container_layout_reservation)
             .setOnClickListener {
                 Toast.makeText(this, "Reservations!", Toast.LENGTH_SHORT).show()
                 // listener?.listenTome()

@@ -1,4 +1,4 @@
-package sv.edu.bitlab.ride.fragments.historyComponents
+package sv.edu.bitlab.ride.fragments.recordComponents
 
 import android.content.Context
 import android.os.Bundle

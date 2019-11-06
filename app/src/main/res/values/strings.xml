@@ -41,16 +41,7 @@
     <string name="two_format_string">%1$s %2$s</string>
 
 
-    <string-array name="accounts">
-        <item>Gilberto</item>
-        <item>Iveth</item>
-        <item>Melvin</item>
-        <item>Luis</item>
-        <item>Dennis</item>
-        <item>José</item>
-        <item>Jorge</item>
-    </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
