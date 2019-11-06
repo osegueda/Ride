@@ -256,7 +256,9 @@ class DashboardFragment : Fragment(), ReservationViewHolder.ReservationItemListe
         return  state!!
     }
      fun pushReservation() {
-        firestoredb.child(today_date).child("rounds").child(active_round).runTransaction(object : Transaction.Handler {
+        firestoredb.child(today_date).child("rounds")
+            .child(active_round)
+            .runTransaction(object : Transaction.Handler {
             override fun doTransaction(mutableData: MutableData): Transaction.Result {
 
                 val p = mutableData.getValue(Reservation::class.java)
