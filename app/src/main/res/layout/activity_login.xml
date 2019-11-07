@@ -11,34 +11,74 @@
         android:id="@+id/edt_email_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
+        android:layout_marginTop="132dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Email"
+        android:hint="@string/email_hint"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <EditText
+        android:id="@+id/edt_nombre"
+        android:layout_width="212dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:inputType="text"
+        android:hint="@string/nombre_hint"
+        app:layout_constraintEnd_toEndOf="@+id/edt_email_id"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edt_email_id"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_id"/>
+
+    <EditText
+        android:id="@+id/edt_apellidos"
+        android:layout_width="212dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:hint="@string/apellido_hint"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/edt_nombre"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edt_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/edt_nombre"/>
 
     <EditText
         android:id="@+id/edt_password_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
+        android:hint="@string/password_hint"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_email_id" />
+        app:layout_constraintEnd_toEndOf="@+id/edt_apellidos"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edt_apellidos"
+        app:layout_constraintTop_toBottomOf="@+id/edt_apellidos" />
 
+    <Button
+        android:id="@+id/btn_registrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/registrarse"
+        app:layout_constraintEnd_toEndOf="@+id/edt_password_id"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/edt_password_id"
+        app:layout_constraintTop_toBottomOf="@+id/edt_password_id">
+
+    </Button>
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Login"
+        android:layout_marginTop="148dp"
+        android:text="@string/login"
         app:layout_constraintEnd_toEndOf="@+id/edt_password_id"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@+id/edt_password_id"
         app:layout_constraintTop_toBottomOf="@+id/edt_password_id">
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.unicomer.models.Reservation
@@ -21,25 +22,27 @@ class ReservationAdapter( var user:String,var userReservations:ArrayList<Reserva
 
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
         holder.bindData()
+        holder.date_txt?.visibility= View.GONE
+        holder.status_txt?.visibility=View.GONE
         holder.id_txt?.text = context.resources.getString(
             R.string.two_format_string,
             "ID:",
-            reservations.get(position).id
+            reservations[position].id
         )
         holder.round_txt?.text = context.resources.getString(
             R.string.two_format_string,
-            "Round:",
-            reservations.get(position).round.toString()
+            "Round Number:",
+            reservations[position].round.toString()
         )
         holder.schedule_txt?.text = context.resources.getString(
             R.string.two_format_string,
             "Schedule:",
-            reservations.get(position).schedule
+            reservations[position].schedule
         )
         holder.count_txt?.text = context.resources.getString(
             R.string.two_format_string,
-            "Available:",
-            reservations.get(position).pplsize.toString()
+            "Available Slots:",
+            reservations[position].pplsize.toString()
         )
         Log.d("backgorund","$user, $reservations")
         if (userReservations?.any { reservation->reservation.users.contains(user)}) {
