@@ -54,7 +54,6 @@
     },
     {
       "client_info": {
-
         "mobilesdk_app_id": "1:183608746150:android:1dcc625c402c2020501467",
         "android_client_info": {
           "package_name": "sv.edu.bitlab.driver"
@@ -107,6 +106,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "183608746150-irvflski5uvre00e8rts1de517m5ctc2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sv.edu.bitlab.ride",
+            "certificate_hash": "aebeae4267fbd5665cc08a8dd4116ec40d0fc3c1"
+          }
+        },
         {
           "client_id": "183608746150-4p8955m3shaaq5egci2vco1phcm2fvhs.apps.googleusercontent.com",
           "client_type": 1,

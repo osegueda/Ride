@@ -1,10 +1,17 @@
 package sv.edu.bitlab.ride
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import sv.edu.bitlab.ride.fragments.reservationComponents.ReservationFragment
 import sv.edu.bitlab.ride.fragments.locationComponents.LocationFragment
 import sv.edu.bitlab.ride.fragments.recordComponents.RecordFragment
@@ -14,7 +21,7 @@ import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
 
-
+    var fbAuth = FirebaseAuth.getInstance()
     private var listener:OnFragmentInteractionListener?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +30,13 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
         listener=this
 
         init()
+
+
+        fbAuth.addAuthStateListener {
+            if(fbAuth.currentUser == null){
+                this.finish()
+            }
+        }
     }
 
 
@@ -106,9 +120,44 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
                 listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_NOTIFICATIONS)
             }
 
+    }
+
+    ///MENU Y OPCION LOGOUT
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.my_menu, menu)
+        return true
+    }
 
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.logout_action -> {
 
+            /*val builder = AlertDialog.Builder(this@MainActivity)
+
+            // Set the alert dialog title
+            builder.setTitle("Log out")
+            // Display a message on alert dialog
+            builder.setMessage("Desea cerrar sesion?")
+
+            builder.setPositiveButton("YES"){dialog, which ->
+                signOut()
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+            builder.setNegativeButton("No"){dialog,which ->
+                Toast.makeText(applicationContext,"Ok",Toast.LENGTH_SHORT).show()
+            }*/
+            signOut()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun signOut(){
+        fbAuth.signOut()
 
     }
 
