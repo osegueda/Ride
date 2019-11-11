@@ -1,6 +1,8 @@
 package sv.edu.bitlab.ride
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,8 +20,8 @@ import sv.edu.bitlab.ride.models.Usuario
 
 class LoginActivity : AppCompatActivity() {
 
-    val mauth = FirebaseAuth.getInstance()
-    val db = FirebaseFirestore.getInstance()
+    private val mauth = FirebaseAuth.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,16 @@ class LoginActivity : AppCompatActivity() {
                 view -> registerUser()
         })
 
+        //verifica si el usuario dejo abierta la sesion para que
+        // aparezca de una vez en el home de nuestra app
+        val user = mauth!!.currentUser
+        if (user != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
     }
 
     private fun login(){
@@ -46,18 +58,25 @@ class LoginActivity : AppCompatActivity() {
         var email = emailtext.text.toString()
         var password = pass.text.toString()
 
-        if (!email.isEmpty() && !password.isEmpty()) {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
             this.mauth.signInWithEmailAndPassword(email, password).addOnCompleteListener ( this, OnCompleteListener<AuthResult> { task ->
                 if (task.isSuccessful) {
+
+                    val userLoggedIn = mauth.currentUser
+                    val sharedPreferences = getSharedPreferences("User details", Context.MODE_PRIVATE)
+                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                    editor.putString("FirebaseUser", userLoggedIn!!.email)
+                    editor.apply()
+
                     startActivity(Intent(this, MainActivity::class.java))
-                    Toast.makeText(this, "Successfully Logged in :)", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Incio sesión exitosamente :)", Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(this, "Error Logging in :(", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error en iniciar sesión :(", Toast.LENGTH_SHORT).show()
                 }
             })
 
         }else {
-            Toast.makeText(this, "Please fill up the Credentials :|", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Porfavor complete las credenciales!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -73,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
         var name = nameTxt.text.toString()
         var apellido = apellidoTxt.text.toString()
 
-        if (!email.isEmpty() && !password.isEmpty() && !name.isEmpty()&& !apellido.isEmpty()) {
+        if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && apellido.isNotEmpty()) {
             mauth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
                 if (task.isSuccessful) {
 
@@ -82,13 +101,13 @@ class LoginActivity : AppCompatActivity() {
                     val uid = user!!.uid
                     //aqui se guarda los datos del usuario en la collection firestore
                     saveInCollectionUserData(apellido,name,email)
-                    Toast.makeText(this, "Successfully registered :)", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Registrado exitosamente :)", Toast.LENGTH_LONG).show()
                 }else {
-                    Toast.makeText(this, "Error registering, try again later :(", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Error en registrar, intente de nuevo :(", Toast.LENGTH_LONG).show()
                 }
             })
         }else {
-            Toast.makeText(this,"Please fill up the Credentials :|", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"Porfavor complete las credenciales!", Toast.LENGTH_LONG).show()
         }
     }
 

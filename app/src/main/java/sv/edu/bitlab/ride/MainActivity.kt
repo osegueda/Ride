@@ -1,8 +1,10 @@
 package sv.edu.bitlab.ride
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
     var fbAuth = FirebaseAuth.getInstance()
     private var listener:OnFragmentInteractionListener?=null
+    var username: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,10 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
         listener=this
 
         init()
+
+        val preferences = getSharedPreferences("User details", Context.MODE_PRIVATE)
+        username = preferences.getString("FirebaseUser", "NO")
+        Log.i("USERNAME", "USER EMAIL: $username")
 
 
         fbAuth.addAuthStateListener {
@@ -134,20 +141,6 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.logout_action -> {
 
-            /*val builder = AlertDialog.Builder(this@MainActivity)
-
-            // Set the alert dialog title
-            builder.setTitle("Log out")
-            // Display a message on alert dialog
-            builder.setMessage("Desea cerrar sesion?")
-
-            builder.setPositiveButton("YES"){dialog, which ->
-                signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
-            builder.setNegativeButton("No"){dialog,which ->
-                Toast.makeText(applicationContext,"Ok",Toast.LENGTH_SHORT).show()
-            }*/
             signOut()
             true
         }
@@ -157,6 +150,11 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
     }
 
     fun signOut(){
+        val sharedPreferences = getSharedPreferences("User details", Context.MODE_PRIVATE)
+        val sharedPref = sharedPreferences?.edit()
+        sharedPref!!.clear()
+        sharedPref.apply()
+
         fbAuth.signOut()
 
     }
