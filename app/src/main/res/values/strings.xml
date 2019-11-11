@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Ride</string>
-
+    <!-- LOGIN SCREEN STRINGS -->
+    <string name="text_password_login">$@drawable/ic_lock+Contraseña</string>
     <!-- SPLASH SCREEN STRINGS -->
     <string name="text_splash_screen_hello">Hello world!</string>
 
@@ -39,9 +40,6 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="two_format_string">%1$s %2$s</string>
-
-
-
 
 
 </resources>
