@@ -15,10 +15,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
-import com.google.firebase.messaging.FirebaseMessaging
+
 
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
+import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.tarea6.ordenHistorial.recyclerView.ReservationAdapter
 import sv.edu.bitlab.tarea6.ordenHistorial.recyclerView.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
@@ -37,7 +38,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
    // private var db= FirebaseFirestore.getInstance()
     private var listView: RecyclerView?=null
     private lateinit  var today_date:String
-    private var user="Moises"
+    private lateinit var user: User
     lateinit var  active_round:String
 
 
@@ -47,6 +48,8 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
         reservations= ArrayList()
         active_reservations= ArrayList()
+        Log.d("USER-FRAG","$user")
+
 
 
     }
@@ -69,7 +72,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
         listView=view.findViewById(R.id.recyclerview_reservation)
         listView?.layoutManager = LinearLayoutManager(this.context!!)
-        listView?.adapter = ReservationAdapter(user,reservations!!,active_reservations!!,this,requireContext())
+        listView?.adapter = ReservationAdapter(user.email!!,reservations!!,active_reservations!!,this,requireContext())
 
         getAllReservations()
         getActiveReservation()
@@ -189,22 +192,6 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
     }
 
-    fun notifications(){
-
-        Log.d("NOTIFICATION", "Subscribing to service topic")
-        // [START subscribe_topics]
-        FirebaseMessaging.getInstance().subscribeToTopic("service")
-            .addOnCompleteListener { task ->
-                var msg = "SUSCRIPTION SUCCESS"
-                if (!task.isSuccessful) {
-                    msg = "SUSCRIPTION FAILED"
-                }
-                Log.d("NOTIFICATION", msg)
-                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-            }
-        // [END subscribe_topics]
-
-    }
 
 
     fun writeFirstRoundOfDay(){
@@ -266,7 +253,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
     private fun checkReservation():Boolean{
 
-        val state= reservations?.any { x->x.users.contains(user)}
+        val state= reservations?.any { x->x.users.contains(user.email)}
 
 
         return  state!!
@@ -278,20 +265,20 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                 val p = mutableData.getValue(Reservation::class.java)
                 Log.d("CHILD","$p")
 
-                if (p!!.users.contains(user)) {
+                if (p!!.users.contains(user.email)) {
 
                    Log.d("TRANSAC","SI ESTA")
                 } else {
                     if (p.pplsize!!>1){
                         p.pplsize = p.pplsize!! -1
-                        p.users.add(user)
+                        p.users.add(user.email!!)
 
 
                     }else{
 
                         if (p.pplsize== 1){
                            p.pplsize=p.pplsize!!-1
-                            p.users.add(user)
+                            p.users.add(user.email!!)
                            p.available=false
                             writeNewRound()
                         }
@@ -324,10 +311,10 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                 val p = mutableData.getValue(Reservation::class.java)
                 Log.d("CHILD","$p")
 
-                if (p!!.users.contains(user)) {
+                if (p!!.users.contains(user.email)) {
 
                     p.pplsize=p.pplsize!!+1
-                    p.users.remove(user)
+                    p.users.remove(user.email)
                     p.available=true
                 } else {
                   Log.d("UPDATE","NO CONTIENE USER")
@@ -381,7 +368,15 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
     companion object {
 
         @JvmStatic
-        fun newInstance() = ReservationFragment()
+        fun newInstance(user:User) : ReservationFragment{
+
+            val fragment = ReservationFragment()
+            fragment.user =user
+            return fragment
+
+        }
+
+
 
     }
 }
