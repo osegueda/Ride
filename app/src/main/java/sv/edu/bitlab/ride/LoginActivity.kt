@@ -29,15 +29,15 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         val loginbtn = findViewById<View>(R.id.btn_login)
-        val register = findViewById<View>(R.id.btn_registrar)
+       //val register = findViewById<View>(R.id.btn_registrar)
 
         loginbtn.setOnClickListener(View.OnClickListener{
             view -> login()
         })
 
-        register.setOnClickListener(View.OnClickListener{
+        /*register.setOnClickListener(View.OnClickListener{
                 view -> registerUser()
-        })
+        })*/
 
         //verifica si el usuario dejo abierta la sesion para que
         // aparezca de una vez en el home de nuestra app
@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun registerUser () {
+    /*private fun registerUser () {
         val emailtext = findViewById<View>(R.id.edt_email_id) as EditText
         val passwordtext = findViewById<View>(R.id.edt_password_id) as EditText
         val nameTxt = findViewById<View>(R.id.edt_nombre) as EditText
@@ -109,10 +109,10 @@ class LoginActivity : AppCompatActivity() {
         }else {
             Toast.makeText(this,"Porfavor complete las credenciales!", Toast.LENGTH_LONG).show()
         }
-    }
+    }*/
 
 
-    private fun saveInCollectionUserData(lastname: String, name: String, email: String){
+    /*private fun saveInCollectionUserData(lastname: String, name: String, email: String){
         //dataclass
         val data = Usuario(lastname,name,email)
 
@@ -125,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
             }
-    }
+    }*/
 
     companion object{
         private const val TAG = "LoginActivity"

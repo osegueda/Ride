@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Ride</string>
 
+
     <!-- SPLASH SCREEN STRINGS -->
     <string name="text_splash_screen_hello">Hello world!</string>
-
+    <string name="name_app">InRide</string>
 
     <!-- NAVIGATION STRINGS -->
     <string name="text_nav_reservations">Reservations</string>
@@ -45,6 +46,7 @@
     <string name="apellido_hint">apellido</string>
     <string name="nombre_hint">nombre</string>
     <string name="email_hint">Email</string>
+
 
 
 </resources>
