@@ -20,7 +20,7 @@ import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.tarea6.ordenHistorial.recyclerView.ReservationAdapter
-import sv.edu.bitlab.tarea6.ordenHistorial.recyclerView.ReservationViewHolder
+import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

@@ -1,4 +1,4 @@
-package sv.edu.bitlab.tarea6.ordenHistorial.recyclerView
+package sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview
 
 import android.view.View
 import android.widget.Button

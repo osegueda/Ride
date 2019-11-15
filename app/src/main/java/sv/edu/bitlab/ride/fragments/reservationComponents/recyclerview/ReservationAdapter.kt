@@ -7,10 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import sv.edu.bitlab.ride.R
+import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
 
 
-class ReservationAdapter( var user:String,var userReservations:ArrayList<Reservation>,var reservations:ArrayList<Reservation>, val listener: ReservationViewHolder.ReservationItemListener,var context:Context
+class ReservationAdapter(var user:String, var userReservations:ArrayList<Reservation>, var reservations:ArrayList<Reservation>, val listener: ReservationViewHolder.ReservationItemListener, var context:Context
 ) : RecyclerView.Adapter<ReservationViewHolder>() {
 
 
