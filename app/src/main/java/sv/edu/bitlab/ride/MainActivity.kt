@@ -46,23 +46,14 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        user = if (savedInstanceState!=null){
-
-            savedInstanceState.getParcelable("reuser")!!
-        }else{
-            intent.extras?.getParcelable("user")!!
-        }
+        
         setContentView(R.layout.activity_main)
         listener=this
-
-        Log.d("USER-MAIN","$user")
-        init()
-
 
         val preferences = getSharedPreferences("User details", Context.MODE_PRIVATE)
         username = preferences.getString("FirebaseUser", "NO")
         Log.i("USERNAME", "USER EMAIL: $username")
+        user= User(username,fbAuth.currentUser?.uid)
 
 
         fbAuth.addAuthStateListener {
@@ -70,6 +61,12 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
                 this.finish()
             }
         }
+
+
+        Log.d("USER-MAIN","$user")
+        init()
+
+
 
         notifications()
         getToken()

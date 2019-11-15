@@ -16,12 +16,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.core.Tag
 import com.google.firebase.firestore.FirebaseFirestore
+import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.ride.models.Usuario
 
 class LoginActivity : AppCompatActivity() {
 
     private val mauth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
+    private lateinit var username:User
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +33,10 @@ class LoginActivity : AppCompatActivity() {
         val loginbtn = findViewById<View>(R.id.btn_login)
        //val register = findViewById<View>(R.id.btn_registrar)
 
-        loginbtn.setOnClickListener(View.OnClickListener{
-            view -> login()
-        })
+        loginbtn.setOnClickListener {
+            Toast.makeText(applicationContext,"CLICKER ON LGIN",Toast.LENGTH_LONG).show()
+            login()
+        }
 
         /*register.setOnClickListener(View.OnClickListener{
                 view -> registerUser()
@@ -41,9 +44,11 @@ class LoginActivity : AppCompatActivity() {
 
         //verifica si el usuario dejo abierta la sesion para que
         // aparezca de una vez en el home de nuestra app
-        val user = mauth!!.currentUser
+        val user = mauth.currentUser
         if (user != null){
             val intent = Intent(this, MainActivity::class.java)
+
+            intent.putExtra("user",user)
             startActivity(intent)
             finish()
         }
@@ -52,16 +57,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(){
-        var emailtext = findViewById<View>(R.id.edt_email_id) as EditText
-        var pass = findViewById<View>(R.id.edt_password_id) as EditText
+        val emailtext = findViewById<View>(R.id.edt_email_id) as EditText
+        val pass = findViewById<View>(R.id.edt_password_id) as EditText
 
-        var email = emailtext.text.toString()
-        var password = pass.text.toString()
+        val email = emailtext.text.toString()
+        val password = pass.text.toString()
+
+
+
+        Log.d("credentials","$email,$password")
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            this.mauth.signInWithEmailAndPassword(email, password).addOnCompleteListener ( this, OnCompleteListener<AuthResult> { task ->
+            Log.d("testing","inside if")
+            mauth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener ( this) { task ->
                 if (task.isSuccessful) {
 
+                    Log.d("testing","inside task")
+                    username=User(email,mauth.currentUser?.uid)
                     val userLoggedIn = mauth.currentUser
                     val sharedPreferences = getSharedPreferences("User details", Context.MODE_PRIVATE)
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
@@ -69,16 +82,24 @@ class LoginActivity : AppCompatActivity() {
                     editor.apply()
 
                     startActivity(Intent(this, MainActivity::class.java))
-                    Toast.makeText(this, "Incio sesión exitosamente :)", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "Incio sesión exitosamente :)", Toast.LENGTH_LONG).show()
+                    Log.d("testing","success to log in")
                 } else {
-                    Toast.makeText(this, "Error en iniciar sesión :(", Toast.LENGTH_SHORT).show()
+                    Log.d("testing","failed to log in -> ${task.exception}")
+
+                    Toast.makeText(applicationContext, "Error en iniciar sesión :(", Toast.LENGTH_SHORT).show()
+                    Log.d("testing","failed to log in")
                 }
-            })
+            }.addOnFailureListener { exception ->
+
+                Log.d("LOGIN","ERROR -> $exception.message")
+            }
 
         }else {
-            Toast.makeText(this, "Porfavor complete las credenciales!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Porfavor complete las credenciales!", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 
     /*private fun registerUser () {
