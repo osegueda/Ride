@@ -8,6 +8,52 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:183608746150:android:8caac87726f98cc0501467",
+        "android_client_info": {
+          "package_name": "com.google.firebase.quickstart.fcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183608746150-spb74lh40li8n1f1tndeoo6dh9nvfef4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.quickstart.fcm",
+            "certificate_hash": "5011a82fb4cf1a8182505a89b23817cc1e9dced1"
+          }
+        },
+        {
+          "client_id": "183608746150-a50nmgqh2tk59avsd8dal7le63rums75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoibqvlacx0t9S9RKO60Ub9G65QS09Fig"
+        },
+        {
+          "current_key": "AIzaSyBbliMxknxuJSHQUkcm2xc6JZLRYnlI8bQ"
+        },
+        {
+          "current_key": "AIzaSyDFdq_3N1x1GFnbXtr1GT4USAMm5DHiubU"
+        },
+        {
+          "current_key": "AIzaSyBq8yBDldBoT_rjnpvA0WpQYuz9Vwi1tyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183608746150-a50nmgqh2tk59avsd8dal7le63rums75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:183608746150:android:1dcc625c402c2020501467",
         "android_client_info": {
           "package_name": "sv.edu.bitlab.driver"
@@ -60,6 +106,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "183608746150-irvflski5uvre00e8rts1de517m5ctc2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sv.edu.bitlab.ride",
+            "certificate_hash": "aebeae4267fbd5665cc08a8dd4116ec40d0fc3c1"
+          }
+        },
+        {
+          "client_id": "183608746150-4p8955m3shaaq5egci2vco1phcm2fvhs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sv.edu.bitlab.ride",
+            "certificate_hash": "b00c1d3004151668928ec83e24750cdf15c973c5"
+          }
+        },
         {
           "client_id": "183608746150-f3a0ivk1m5b0ki7bm57q9bs8av5p30k1.apps.googleusercontent.com",
           "client_type": 1,

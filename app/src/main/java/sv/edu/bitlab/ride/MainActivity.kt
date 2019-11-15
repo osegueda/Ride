@@ -1,16 +1,32 @@
 package sv.edu.bitlab.ride
 
+
+import android.content.Context
+
 import android.app.PendingIntent
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+
+
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
+
 import sv.edu.bitlab.ride.fragments.reservationComponents.ReservationFragment
 import sv.edu.bitlab.ride.fragments.locationComponents.LocationFragment
 import sv.edu.bitlab.ride.fragments.recordComponents.RecordFragment
@@ -20,8 +36,13 @@ import sv.edu.bitlab.ride.models.User
 class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
 
+
+    var fbAuth = FirebaseAuth.getInstance()
+=======
     private lateinit var user: User
+
     private var listener:OnFragmentInteractionListener?=null
+    var username: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +58,22 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
         Log.d("USER-MAIN","$user")
         init()
+
+
+        val preferences = getSharedPreferences("User details", Context.MODE_PRIVATE)
+        username = preferences.getString("FirebaseUser", "NO")
+        Log.i("USERNAME", "USER EMAIL: $username")
+
+
+        fbAuth.addAuthStateListener {
+            if(fbAuth.currentUser == null){
+                this.finish()
+            }
+        }
+
         notifications()
         getToken()
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -130,9 +165,35 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
                 listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_NOTIFICATIONS)
             }
 
+    }
+
+    ///MENU Y OPCION LOGOUT
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.my_menu, menu)
+        return true
+    }
 
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.logout_action -> {
 
+            signOut()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun signOut(){
+        val sharedPreferences = getSharedPreferences("User details", Context.MODE_PRIVATE)
+        val sharedPref = sharedPreferences?.edit()
+        sharedPref!!.clear()
+        sharedPref.apply()
+
+        fbAuth.signOut()
 
 
 
