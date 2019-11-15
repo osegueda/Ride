@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
 
     var fbAuth = FirebaseAuth.getInstance()
-=======
+
     private lateinit var user: User
 
     private var listener:OnFragmentInteractionListener?=null

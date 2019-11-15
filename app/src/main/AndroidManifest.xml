@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity" />
   <activity android:name=".LoginActivity"> 
     <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
   
-  </activity>
+
 
         <activity android:name=".LoginTest"/>
 
@@ -46,9 +46,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" /> <!-- [END fcm_default_channel] -->
-        <activity android:name=".MainActivity">
 
-        </activity>
 
         <service
             android:name=".notifications.MyFirebaseMessagingService"
