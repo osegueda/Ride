@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 
 
@@ -226,7 +227,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                             field.users.add(user.email!!)
                            field.available=false
 
-                            writeNewRound()
+                            //writeNewRound()
                         }
                     }
                 }
@@ -241,7 +242,26 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                 dataSnapshot: DataSnapshot?
             ) {
                 // Transaction completed
-                   Log.d("TRANSACTION COMPLETE", "postTransaction:onComplete: ${databaseError.toString()}" )
+                 //  Log.d("TRANSACTION COMPLETE", "postTransaction:onComplete: ${databaseError?.message}" )
+              //  Log.d("TRANSACTION COMPLETE", "postTransaction:onComplete: ${databaseError?.details}" )
+               // Log.d("TRANSACTION boolean", "Boolean-> $b" )
+                Log.d("TRANSACTION snap", "snap-> $dataSnapshot" )
+                val snap=dataSnapshot?.getValue(Reservation::class.java)
+                val state= snap?.users?.any { x->x.contains(user.email!!)}
+
+                if (state!!){
+
+                    Snackbar.make(requireView(), "Reservation added successfully", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Ok") {  }.show()
+
+                }else{
+                    Snackbar.make(requireView(), "Server Error: Please try again", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry") { pushReservation() }.show()
+
+                }
+
+
+
             }
         })
     }
