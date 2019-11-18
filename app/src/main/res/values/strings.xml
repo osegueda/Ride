@@ -5,7 +5,8 @@
     <!-- SPLASH SCREEN STRINGS -->
     <string name="text_splash_screen_hello">Hello world!</string>
     <string name="name_app">InRide</string>
-
+    <string name="content_desc_micro">img_microbus</string>
+    <string name="content_desc_pastilla">pastilla</string>
     <!-- NAVIGATION STRINGS -->
     <string name="text_nav_reservations">Reservations</string>
     <string name="text_nav_record">Record</string>
@@ -73,8 +74,9 @@
     <!-- [END fcm_default_icon_string] -->
     <string name="msg_subscribe_failed">Failed to subscribe to service topic</string>
     <string name="fcm_message">FCM Message</string>
-    <string name="content_desc_micro">img_microbus</string>
+
     <string name="reservar_btn">Reservar</string>
+
 
 
 </resources>

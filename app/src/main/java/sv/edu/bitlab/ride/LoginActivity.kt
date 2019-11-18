@@ -21,8 +21,8 @@ import sv.edu.bitlab.ride.models.Usuario
 
 class LoginActivity : AppCompatActivity() {
 
+
     private val mauth = FirebaseAuth.getInstance()
-    private val db = FirebaseFirestore.getInstance()
     private lateinit var username:User
 
 
@@ -31,16 +31,13 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         val loginbtn = findViewById<View>(R.id.btn_login)
-       //val register = findViewById<View>(R.id.btn_registrar)
+
 
         loginbtn.setOnClickListener {
             Toast.makeText(applicationContext,"CLICKER ON LGIN",Toast.LENGTH_LONG).show()
             login()
         }
 
-        /*register.setOnClickListener(View.OnClickListener{
-                view -> registerUser()
-        })*/
 
         //verifica si el usuario dejo abierta la sesion para que
         // aparezca de una vez en el home de nuestra app
@@ -80,8 +77,8 @@ class LoginActivity : AppCompatActivity() {
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putString("FirebaseUser", userLoggedIn!!.email)
                     editor.apply()
-
                     startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                     Toast.makeText(applicationContext, "Incio sesión exitosamente :)", Toast.LENGTH_LONG).show()
                     Log.d("testing","success to log in")
                 } else {
@@ -100,53 +97,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        //finishAffinity()
+        finish()
+    }
 
-
-    /*private fun registerUser () {
-        val emailtext = findViewById<View>(R.id.edt_email_id) as EditText
-        val passwordtext = findViewById<View>(R.id.edt_password_id) as EditText
-        val nameTxt = findViewById<View>(R.id.edt_nombre) as EditText
-        val apellidoTxt = findViewById<View>(R.id.edt_apellidos) as EditText
-
-        var email = emailtext.text.toString()
-        var password = passwordtext.text.toString()
-        var name = nameTxt.text.toString()
-        var apellido = apellidoTxt.text.toString()
-
-        if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && apellido.isNotEmpty()) {
-            mauth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
-                if (task.isSuccessful) {
-
-                    //se puede obtener el id y el email del usuario ya creado
-                    val user = mauth.currentUser
-                    val uid = user!!.uid
-                    //aqui se guarda los datos del usuario en la collection firestore
-                    saveInCollectionUserData(apellido,name,email)
-                    Toast.makeText(this, "Registrado exitosamente :)", Toast.LENGTH_LONG).show()
-                }else {
-                    Toast.makeText(this, "Error en registrar, intente de nuevo :(", Toast.LENGTH_LONG).show()
-                }
-            })
-        }else {
-            Toast.makeText(this,"Porfavor complete las credenciales!", Toast.LENGTH_LONG).show()
-        }
-    }*/
-
-
-    /*private fun saveInCollectionUserData(lastname: String, name: String, email: String){
-        //dataclass
-        val data = Usuario(lastname,name,email)
-
-        //se manda a la collection el dataclass
-        db.collection("users")
-            .add(data)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
-    }*/
 
     companion object{
         private const val TAG = "LoginActivity"
