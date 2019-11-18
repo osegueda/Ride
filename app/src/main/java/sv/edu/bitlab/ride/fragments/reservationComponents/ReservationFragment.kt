@@ -160,10 +160,12 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         firestoredb.child("$today_date/rounds").push().setValue(reservationOfDay)
     }
     fun writeNewRound(){
+
         val roundNumber= active_reservations!![0].round!!+1
         val newround = Reservation(true,today_date,"",11,roundNumber,"7:00AM-9:00AM","available")
         firestoredb.child("$today_date/active_rounds").removeValue()
         firestoredb.child("$today_date/rounds").push().setValue(newround)
+        Log.d("NEW-ROUND","THE ACTIVE ROUND IS ->$roundNumber ")
     }
     private fun confirmReservation() {
         val alertDialog = AlertDialog.Builder(requireContext())
@@ -200,48 +202,55 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
     }
     private fun pushReservation() {
         firestoredb.child(today_date).child("rounds").child(active_round).runTransaction(object : Transaction.Handler {
+
             override fun doTransaction(mutableData: MutableData): Transaction.Result {
-                val p = mutableData.getValue(Reservation::class.java)
-                Log.d("CHILD","$p")
+                val field = mutableData.getValue(Reservation::class.java)
+                Log.d("CHILD","$field")
 
 
-                if (p!!.users.contains(user.email)) {
+                if (field!!.users.contains(user.email)) {
 
                    Log.d("TRANSAC","SI ESTA")
+                    Transaction.abort()
                 } else {
-                    if (p.pplsize!!>1){
-                        p.pplsize = p.pplsize!! -1
-                        p.users.add(user.email!!)
+                    if (field.pplsize!!>1){
+                        field.pplsize = field.pplsize!! -1
+                        field.users.add(user.email!!)
 
 
 
                     }else{
-                        if (p.pplsize== 1){
+                        if (field.pplsize== 1){
 
-                           p.pplsize=p.pplsize!!-1
-                            p.users.add(user.email!!)
-                           p.available=false
+                           field.pplsize=field.pplsize!!-1
+                            field.users.add(user.email!!)
+                           field.available=false
 
                             writeNewRound()
                         }
                     }
                 }
                 // Set value and report transaction success
-                mutableData.value = p
+                mutableData.value = field
                 return Transaction.success(mutableData)
             }
+
             override fun onComplete(
                 databaseError: DatabaseError?,
                 b: Boolean,
                 dataSnapshot: DataSnapshot?
             ) {
                 // Transaction completed
-                //   Log.d("TRANSACTION COMPLETE", "postTransaction:onComplete:" + databaseError!!)
+                   Log.d("TRANSACTION COMPLETE", "postTransaction:onComplete: ${databaseError.toString()}" )
             }
         })
     }
     private fun updateUsers() {
-        firestoredb.child(today_date).child("rounds").child(active_round).runTransaction(object : Transaction.Handler {
+
+        val email=user.email
+        val round=getUserRound(email!!)
+    Log.d("GETUSER","THE ID THE ROUND IN USER IS -> $round")
+        firestoredb.child(today_date).child("rounds").child(round).runTransaction(object : Transaction.Handler {
             override fun doTransaction(mutableData: MutableData): Transaction.Result {
                 val p = mutableData.getValue(Reservation::class.java)
                 Log.d("CHILD","$p")
@@ -278,6 +287,16 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
             Toast.makeText(requireContext(),"Card #$position",Toast.LENGTH_LONG).show()
             confirmReservation()
         }
+    }
+
+    private fun getUserRound(user:String):String{
+        val reserv=reservations?.filter{reservation ->
+
+            reservation.users.contains(user)
+
+        }
+
+        return reserv?.get(0)?.id.toString()
     }
     override fun onItemClickDetalle(btn_detalle: Button, position: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
