@@ -73,6 +73,8 @@
     <!-- [END fcm_default_icon_string] -->
     <string name="msg_subscribe_failed">Failed to subscribe to service topic</string>
     <string name="fcm_message">FCM Message</string>
+    <string name="content_desc_micro">img_microbus</string>
+    <string name="reservar_btn">Reservar</string>
 
 
 </resources>
