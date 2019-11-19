@@ -1,5 +1,6 @@
 package sv.edu.bitlab.ride.fragments.reservationComponents
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
+import sv.edu.bitlab.ride.APPLICATION_NAME
 
 
 import sv.edu.bitlab.ride.R
@@ -36,6 +38,8 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
     private lateinit  var today_date:String
     private lateinit var user: User
     lateinit var  active_round:String
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

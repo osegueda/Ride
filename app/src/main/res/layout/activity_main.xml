@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:background="@color/unicomer_color"
         android:id="@+id/container_navigation"
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -27,6 +28,7 @@
         <LinearLayout
             android:id="@+id/container_layout_reservation"
             android:layout_width="0dp"
+            android:background="@drawable/input_nav_button"
             android:clickable="true" android:focusable="true"
             android:layout_height="match_parent"
             android:layout_weight="50"
@@ -45,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="40"
+                android:textColor="@color/unicomer_white"
                 android:fontFamily="@font/roboto"
                 android:text="@string/text_nav_reservations"
                 android:textAlignment="center" />
@@ -57,6 +60,7 @@
             android:clickable="true" android:focusable="true"
             android:layout_height="match_parent"
             android:layout_weight="50"
+            android:background="@drawable/input_nav_button"
             android:orientation="vertical" >
 
             <ImageView
@@ -72,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="40"
+                android:textColor="@color/unicomer_white"
                 android:fontFamily="@font/roboto"
                 android:text="@string/text_nav_location"
                 android:textAlignment="center" />
@@ -80,12 +85,13 @@
 
 
         <LinearLayout
-            android:visibility="gone"
+
             android:id="@+id/container_layout_settings"
             android:layout_width="0dp"
             android:clickable="true" android:focusable="true"
             android:layout_height="match_parent"
             android:layout_weight="50"
+            android:background="@drawable/input_nav_button"
             android:orientation="vertical">
 
             <ImageView
@@ -94,12 +100,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="60"
                 android:contentDescription="@string/text_content_description_ic_navigation"
-                app:srcCompat="@drawable/ic_settings" />
+                app:srcCompat="@drawable/ic_history" />
 
             <TextView
                 android:id="@+id/text_view_nav_settings"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:textColor="@color/unicomer_white"
                 android:layout_weight="40"
                 android:fontFamily="@font/roboto"
                 android:text="@string/text_nav_record"
@@ -108,6 +115,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/container_layout_notifications"
             android:layout_width="0dp"
             android:clickable="true" android:focusable="true"

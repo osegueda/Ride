@@ -8,7 +8,7 @@
 
     <!-- NAVIGATION STRINGS -->
     <string name="text_nav_reservations">Reservations</string>
-    <string name="text_nav_record">Record</string>
+    <string name="text_nav_record">History</string>
     <string name="text_nav_location">Location</string>
     <string name="text_nav_notifications">Notifications</string>
 
