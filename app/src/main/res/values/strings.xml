@@ -28,6 +28,12 @@
     <string name="text_record_hello">Reservations record!</string>
 
 
+    <!-- LOTTIE STRINGS -->
+
+    <string name="lottie_fragment_reservations_part1"><b>Loading data from server</b>  </string>
+    <string name="lottie_fragment_reservations_part2">Please wait</string>
+
+
     <!-- Reservation cardview (list_row_reservation)-->
     <string name="reservation_id">Reservation ID</string>
     <string name="date">Date</string>
@@ -40,6 +46,12 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="two_format_string">%1$s %2$s</string>
+
+    <string name="reservation_number"> 1</string>
+    <string name="reservation_result"><b>Your round number</b></string>
+<string name="reservation_finished">Your Round has finished</string>
+    <string name="reservation_begun">Your Round has begun</string>
+
 
     <string name="login">Login</string>
     <string name="registrarse">Registrarse</string>

@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -35,6 +36,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
     private var active_reservations:ArrayList<Reservation> ?=null
     // private var db= FirebaseFirestore.getInstance()
     private var listView: RecyclerView?=null
+    private var fragmentView:View?=null
     private lateinit  var today_date:String
     private lateinit var user: User
     lateinit var  active_round:String
@@ -57,6 +59,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         savedInstanceState: Bundle?
     ): View? {
         val view=inflater.inflate(R.layout.fragment_reservation, container, false)
+        fragmentView=view
         return view
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -146,6 +149,9 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                     val adapter =listView?.adapter as ReservationAdapter
                     adapter.reservations= active_reservations as ArrayList<Reservation>
                     adapter.notifyDataSetChanged()
+                    val anim =fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml)
+                    anim?.visibility=View.GONE
+
                     Log.d("ACTIVE_RESERVATIONS","$active_reservations")
                 }else{
                     Log.d("ACTIVE","no existe")
@@ -255,12 +261,13 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
                 if (state!!){
 
-                    Snackbar.make(requireView(), "Reservation added successfully", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(requireView(), "Reservation added successfully", Snackbar.LENGTH_LONG)
                         .setAction("Ok") {  }.show()
 
                 }else{
-                    Snackbar.make(requireView(), "Server Error: Please try again", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Retry") { pushReservation() }.show()
+                    pushReservation()
+                   /* Snackbar.make(requireView(), "Server Error: Please try again", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry") { pushReservation() }.show()*/
 
                 }
 
@@ -302,13 +309,28 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
             }
         })
     }
-    override fun onItemClickReservation(position: Int) {
+    override fun onItemClickReservation(position: Int,round_status:String) {
         if (checkReservation()){
             /* Snackbar.make(requireView(), "you have already reserved", Snackbar.LENGTH_LONG)
                  .setAction("OK") {  }.show()*/
-            deleteReservation()
+            //Toast.makeText(requireContext(),"status->$round_status",Toast.LENGTH_LONG).show()
+            when(round_status){
+
+
+                "ongoing"->{
+
+                     Snackbar.make(requireView(), "you cant cancel now, the round is ongoing", Snackbar.LENGTH_LONG)
+                 .setAction("OK") {  }.show()
+                }
+                "available"->{
+                    deleteReservation()
+                }
+                "finished"->{ Snackbar.make(requireView(), "Your round is already finished, Thank you for using unicomer ride", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("OK") {  }.show()}
+            }
+
         }else{
-            Toast.makeText(requireContext(),"Card #$position",Toast.LENGTH_LONG).show()
+          //  Toast.makeText(requireContext(),"Card #$position",Toast.LENGTH_LONG).show()
             confirmReservation()
         }
     }
@@ -322,12 +344,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
         return reserv?.get(0)?.id.toString()
     }
-    override fun onItemClickDetalle(btn_detalle: Button, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-    override fun onTextInput(input: String, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    
     companion object {
         @JvmStatic
         fun newInstance(user:User) : ReservationFragment{

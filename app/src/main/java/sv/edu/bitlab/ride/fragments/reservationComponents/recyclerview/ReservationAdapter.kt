@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
@@ -23,6 +24,7 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
 
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
         holder.bindData()
+
         holder.date_txt?.visibility= View.GONE
         holder.status_txt?.visibility=View.GONE
         holder.id_txt?.text = context.resources.getString(
@@ -46,11 +48,54 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
             reservations[position].pplsize.toString()
         )
         Log.d("backgorund","$user, $reservations")
-        if (userReservations?.any { reservation->reservation.users.contains(user)}) {
-            holder.container!!.setBackgroundColor(context.resources.getColor(android.R.color.holo_green_dark))
+        if (userReservations.any { reservation->reservation.users.contains(user)
+                .apply {  holder.result_number?.text=reservation.round.toString()
+
+                    holder.container?.setOnClickListener{
+
+                        listener.onItemClickReservation(position,reservation.round_status!!)
+
+                    }
+
+                    when(reservation.round_status){
+
+                        "finished"->{
+                            holder.card1?.visibility=View.GONE
+                            holder.card2?.visibility=View.VISIBLE
+                            holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_red_dark))
+                            holder.result_txt?.text=context.getString(R.string.reservation_finished)
+                            holder.result_txt?.textSize=20.0F
+
+                        }
+
+                        "available"->{
+                            holder.container!!.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_green_dark))
+                            Log.d("USER","SI ESTA")
+                            holder.card1?.visibility=View.GONE
+                            holder.card2?.visibility=View.VISIBLE
+                            holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_green_dark))
+                            holder.result_txt?.text=context.getString(R.string.reservation_result)
+                            holder.result_txt?.textSize=20.0F
+                        }
+
+                        "ongoing"->{
+
+                            holder.card1?.visibility=View.GONE
+                            holder.card2?.visibility=View.VISIBLE
+                            holder.card2?.setBackgroundColor(ContextCompat.getColor(context,R.color.yellow))
+                            holder.result_txt?.text=context.getString(R.string.reservation_begun)
+                            holder.result_txt?.textSize=20.0F
+                        }
+
+                    }
+
+                } }) {
             Log.d("USER","SI ESTA")
+
         } else {
-            holder.container!!.setBackgroundColor(context.resources.getColor(android.R.color.holo_red_light))
+            holder.container!!.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_red_dark))
+            holder.card1?.visibility=View.VISIBLE
+            holder.card2?.visibility=View.GONE
             Log.d("USER","NO ESTA")
         }
 
