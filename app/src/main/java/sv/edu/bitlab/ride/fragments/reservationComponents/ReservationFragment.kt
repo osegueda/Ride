@@ -28,6 +28,10 @@ import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.Reservati
 import sv.edu.bitlab.unicomer.models.Reservation
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+
 @Suppress("UNCHECKED_CAST")
 class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemListener{
     private var listener: OnFragmentInteractionListener? = null
@@ -38,11 +42,12 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
     private var listView: RecyclerView?=null
     private var fragmentView:View?=null
     private lateinit  var today_date:String
+    val calendar = Calendar.getInstance()
     private lateinit var user: User
     lateinit var  active_round:String
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reservations= ArrayList()
@@ -62,7 +67,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         fragmentView=view
         return view
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+  //  @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listView=view.findViewById(R.id.recyclerview_reservation)
@@ -90,13 +95,21 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         super.onDetach()
         listener = null
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+  //  @RequiresApi(Build.VERSION_CODES.O)
     private fun getAllReservations(){
-        val current = LocalDateTime.now()
+      /*  val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val formatted = current.format(formatter)
-        today_date=formatted
-        Log.d("DATE", formatted)
+      val formatted = current.format(formatter)*/
+
+        val year=calendar.get(Calendar.YEAR)
+        val month=calendar.get(Calendar.MONTH)+1
+        val day=calendar.get(Calendar.DAY_OF_MONTH)
+
+        val date = "$day-$month-$year"
+      Toast.makeText(requireContext(), date,Toast.LENGTH_LONG).show()
+        //today_date=formatted
+        today_date=date
+      //  Log.d("DATE", formatted)
         firestoredb.child(today_date).child("rounds").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()){
