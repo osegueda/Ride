@@ -189,11 +189,9 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
         val sharedPref = sharedPreferences?.edit()
         sharedPref!!.clear()
         sharedPref.apply()
-
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
         fbAuth.signOut()
-
-
-
     }
 
     private fun notifications(){

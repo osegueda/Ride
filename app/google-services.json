@@ -30,15 +30,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyAoibqvlacx0t9S9RKO60Ub9G65QS09Fig"
-        },
-        {
-          "current_key": "AIzaSyBbliMxknxuJSHQUkcm2xc6JZLRYnlI8bQ"
-        },
-        {
-          "current_key": "AIzaSyDFdq_3N1x1GFnbXtr1GT4USAMm5DHiubU"
-        },
-        {
-          "current_key": "AIzaSyBq8yBDldBoT_rjnpvA0WpQYuz9Vwi1tyc"
         }
       ],
       "services": {
@@ -76,15 +67,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyAoibqvlacx0t9S9RKO60Ub9G65QS09Fig"
-        },
-        {
-          "current_key": "AIzaSyBbliMxknxuJSHQUkcm2xc6JZLRYnlI8bQ"
-        },
-        {
-          "current_key": "AIzaSyDFdq_3N1x1GFnbXtr1GT4USAMm5DHiubU"
-        },
-        {
-          "current_key": "AIzaSyBq8yBDldBoT_rjnpvA0WpQYuz9Vwi1tyc"
         }
       ],
       "services": {
@@ -106,6 +88,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "183608746150-etaelje5i9tjcpf439c2llvc8rhf40un.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sv.edu.bitlab.ride",
+            "certificate_hash": "766c24cf97874bdaff7814e0ca1e634aab571613"
+          }
+        },
         {
           "client_id": "183608746150-irvflski5uvre00e8rts1de517m5ctc2.apps.googleusercontent.com",
           "client_type": 1,
@@ -138,15 +128,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyAoibqvlacx0t9S9RKO60Ub9G65QS09Fig"
-        },
-        {
-          "current_key": "AIzaSyBbliMxknxuJSHQUkcm2xc6JZLRYnlI8bQ"
-        },
-        {
-          "current_key": "AIzaSyDFdq_3N1x1GFnbXtr1GT4USAMm5DHiubU"
-        },
-        {
-          "current_key": "AIzaSyBq8yBDldBoT_rjnpvA0WpQYuz9Vwi1tyc"
         }
       ],
       "services": {
@@ -184,15 +165,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyAoibqvlacx0t9S9RKO60Ub9G65QS09Fig"
-        },
-        {
-          "current_key": "AIzaSyBbliMxknxuJSHQUkcm2xc6JZLRYnlI8bQ"
-        },
-        {
-          "current_key": "AIzaSyDFdq_3N1x1GFnbXtr1GT4USAMm5DHiubU"
-        },
-        {
-          "current_key": "AIzaSyBq8yBDldBoT_rjnpvA0WpQYuz9Vwi1tyc"
         }
       ],
       "services": {
