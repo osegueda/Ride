@@ -47,6 +47,9 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="two_format_string">%1$s %2$s</string>
+    <string name="reservado">Reservado</string>
+
+
 
     <string name="reservation_number"> 1</string>
     <string name="reservation_result"><b>Your round number</b></string>

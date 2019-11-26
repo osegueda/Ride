@@ -1,4 +1,5 @@
 package sv.edu.bitlab.ride.fragments.reservationComponents
+import ReservationAdapter
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
@@ -18,12 +19,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import sv.edu.bitlab.ride.APPLICATION_NAME
-
-
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.User
-import sv.edu.bitlab.tarea6.ordenHistorial.recyclerView.ReservationAdapter
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
 import java.time.LocalDateTime
