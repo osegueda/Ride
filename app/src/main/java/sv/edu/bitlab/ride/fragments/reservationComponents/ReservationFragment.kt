@@ -67,7 +67,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         fragmentView=view
         return view
     }
-  //  @RequiresApi(Build.VERSION_CODES.O)
+  @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listView=view.findViewById(R.id.recyclerview_reservation)
@@ -95,20 +95,20 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         super.onDetach()
         listener = null
     }
-  //  @RequiresApi(Build.VERSION_CODES.O)
+   @RequiresApi(Build.VERSION_CODES.O)
     private fun getAllReservations(){
-      /*  val current = LocalDateTime.now()
+        val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-      val formatted = current.format(formatter)*/
+      val formatted = current.format(formatter)
 
-        val year=calendar.get(Calendar.YEAR)
+     /*   val year=calendar.get(Calendar.YEAR)
         val month=calendar.get(Calendar.MONTH)+1
-        val day=calendar.get(Calendar.DAY_OF_MONTH)
+        val day=calendar.get(Calendar.DAY_OF_MONTH)*/
 
-        val date = "$day-$month-$year"
-      Toast.makeText(requireContext(), date,Toast.LENGTH_LONG).show()
-        //today_date=formatted
-        today_date=date
+        //val date = "$day-$month-$year"
+     // Toast.makeText(requireContext(), date,Toast.LENGTH_LONG).show()
+        today_date=formatted
+       // today_date=date
       //  Log.d("DATE", formatted)
         firestoredb.child(today_date).child("rounds").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
