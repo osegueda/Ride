@@ -14,12 +14,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 import sv.edu.bitlab.ride.R
+import sv.edu.bitlab.ride.fragments.recordComponents.recyclerview.RecordAdapter
+import sv.edu.bitlab.ride.fragments.recordComponents.recyclerview.RecordViewHolder
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.ride.models.UserHistory
+import sv.edu.bitlab.tarea6.ordenHistorial.recyclerView.ReservationAdapter
 
 
-class RecordFragment : Fragment() {
+class RecordFragment : Fragment(),RecordViewHolder.RecordItemListener {
+    override fun onItemClickRecord(position: Int) {
+
+    }
 
 
     private var listener: OnFragmentInteractionListener? = null
@@ -56,9 +62,9 @@ class RecordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       //listview=view.findViewById(R.id.)
+       listview=view.findViewById(R.id.record_recycler)
         listview?.layoutManager = LinearLayoutManager(this.context!!)
-       // listview.adapter
+        listview?.adapter= RecordAdapter(history,this,requireContext())
         getReservations()
 
 
@@ -95,6 +101,11 @@ class RecordFragment : Fragment() {
                     history.add(rsv)
 
                 }
+                val adapter =listview?.adapter as RecordAdapter
+                adapter.history=history
+                adapter.notifyDataSetChanged()
+
+
                 Log.d("RESULT-ARRAYLIST", "THE ARRAY IS ->$history")
 
 
