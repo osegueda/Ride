@@ -2,22 +2,45 @@ package sv.edu.bitlab.ride.fragments.recordComponents
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
+import sv.edu.bitlab.ride.models.User
+import sv.edu.bitlab.ride.models.UserHistory
 
 
 class RecordFragment : Fragment() {
 
 
     private var listener: OnFragmentInteractionListener? = null
+    private var db=FirebaseFirestore.getInstance()
+    private lateinit var history:ArrayList<UserHistory>
+    private val mauth = FirebaseAuth.getInstance()
+    private lateinit var user:String
+    private var listview:RecyclerView?=null
+    private var fragmentView:View?=null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        history= ArrayList()
+        user=mauth.currentUser?.email.toString()
+       // Log.d("USER","${mauth.currentUser?.email}")
+         Log.d("USER", user)
+        Log.d("INIT","the arrayList is -> $history")
+    Toast.makeText(requireContext(),"im in record",Toast.LENGTH_LONG).show()
 
     }
 
@@ -25,10 +48,25 @@ class RecordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_record, container, false)
+        val view=inflater.inflate(R.layout.fragment_record, container, false)
+        fragmentView=view
+        return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+       //listview=view.findViewById(R.id.)
+        listview?.layoutManager = LinearLayoutManager(this.context!!)
+       // listview.adapter
+        getReservations()
+
+
+
+
+
+
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,6 +82,31 @@ class RecordFragment : Fragment() {
         listener = null
     }
 
+    private fun getReservations(){
+
+       db.collection("users").document(user).collection("reservations")
+        //db.collectionGroup("reservations")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d("ALL-RES", "${document.id} => ${document.data}")
+
+                    val rsv = document.toObject(UserHistory::class.java)
+                    history.add(rsv)
+
+                }
+                Log.d("RESULT-ARRAYLIST", "THE ARRAY IS ->$history")
+
+
+            }
+            .addOnFailureListener { exception ->
+                Log.d("ALL-RES", "Error getting documents: ", exception)
+            }
+
+
+
+
+    }
 
 
     companion object {
