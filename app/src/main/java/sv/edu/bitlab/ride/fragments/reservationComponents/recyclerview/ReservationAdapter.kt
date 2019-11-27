@@ -1,4 +1,4 @@
-package sv.edu.bitlab.tarea6.ordenHistorial.recyclerView
+package sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview
 
 import android.content.Context
 import android.util.Log
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import sv.edu.bitlab.ride.R
-import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
 
 

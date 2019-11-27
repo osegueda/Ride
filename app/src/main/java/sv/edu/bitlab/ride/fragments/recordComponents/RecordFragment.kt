@@ -17,9 +17,7 @@ import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.fragments.recordComponents.recyclerview.RecordAdapter
 import sv.edu.bitlab.ride.fragments.recordComponents.recyclerview.RecordViewHolder
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
-import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.ride.models.UserHistory
-import sv.edu.bitlab.tarea6.ordenHistorial.recyclerView.ReservationAdapter
 
 
 class RecordFragment : Fragment(),RecordViewHolder.RecordItemListener {
