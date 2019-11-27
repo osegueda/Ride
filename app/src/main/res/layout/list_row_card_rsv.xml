@@ -6,11 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E4E3E3">
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/id_cardview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         style="@style/CardView.Light"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -19,13 +22,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="12dp">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:contentDescription="@string/content_desc_micro"
                 android:scaleType="centerCrop"
                 android:src="@drawable/busste"
                 app:layout_constraintDimensionRatio="H,16:9"
@@ -49,6 +53,7 @@
                     android:id="@+id/circleImage"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:contentDescription="@string/content_desc_pastilla"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ubicacion" />
 
@@ -60,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Reservación"
+                android:text="@string/title_reservacion"
                 app:layout_constraintBottom_toTopOf="@+id/desc"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toTopOf="@+id/view" />
@@ -71,134 +76,151 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Tu reserva"
+                android:text="@string/tu_reserva"
                 android:textColor="#8A000000"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
-
-            <TextView
-                android:id="@+id/id_schedule"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="@string/schedule"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="@+id/id_round_number"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_round_number" />
-
-            <TextView
-                android:id="@+id/id_round"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="@string/reservation_id"
-                app:layout_constraintBottom_toTopOf="@+id/id_reservation_count"
-                app:layout_constraintEnd_toStartOf="@+id/divider2"
-                app:layout_constraintHorizontal_bias="0.114"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/id_round_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="@string/round"
-                app:layout_constraintBottom_toTopOf="@+id/id_schedule"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.088"
-                app:layout_constraintStart_toEndOf="@+id/divider2" />
-
-            <TextView
-                android:id="@+id/id_reservation_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="@string/reservation_count"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="@+id/id_round"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_round" />
-
             <View
                 android:id="@+id/divider2"
-                android:layout_width="1dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:background="#EBE0E0"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.578"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3"
-                app:layout_constraintVertical_bias="0.733" />
-
-            <View
-                android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#EBE0E0"
+                android:layout_marginTop="3dp"
+                android:background="#FF838181"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <LinearLayout
+                android:id="@+id/data_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#4DAFE3E9"
+                android:orientation="horizontal"
+
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider2">
+
+                <LinearLayout
+                    android:layout_marginTop="7dp"
+                    android:layout_width="220dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:paddingStart="8dp"
+                        android:paddingEnd="0dp"
+                        android:id="@+id/id_round"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/reservation_id" />
+
+                    <TextView
+                        android:paddingStart="8dp"
+                        android:paddingEnd="0dp"
+                        android:id="@+id/id_reservation_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/reservation_count" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="7dp"
+                    android:layout_width="188dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/id_round_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/round" />
+
+                    <TextView
+                        android:id="@+id/id_schedule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/schedule" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="224dp"
+                android:layout_marginTop="1dp"
                 android:orientation="vertical"
-                android:paddingTop="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/data_container">
 
                 <Button
+                    android:id="@+id/button_rsv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@drawable/button_radius"
                     android:text="@string/reservar_btn"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/unicomer_white" />
+
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/id_detalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:layout_editor_absoluteX="172dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/id_card1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_marginTop="7dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|center_horizontal"
-                        android:text="Detalle de reserva" />
+                        android:text="@string/detalle_de_reserva" />
 
                     <Button
-                        android:id="@+id/arrowBtn"
+                        android:id="@+id/id_arrowBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical|center_horizontal"
                         android:background="@drawable/ic_keyboard_arrow_down_black_24dp" />
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/expandableView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#613A8CE4"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                tools:layout_editor_absoluteX="172dp">
-
                 <LinearLayout
+                    android:id="@+id/id_card2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:background="#613A8CE4"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/id_card1">
 
                     <TextView
                         android:id="@+id/result_txt"
@@ -217,6 +239,7 @@
                         android:id="@+id/result_round_number_txt"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginBottom="9dp"
                         android:layout_gravity="center_vertical|center_horizontal"
                         android:background="@drawable/circular_txtview"
                         android:text="@string/reservation_number"
@@ -226,12 +249,13 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
     </androidx.cardview.widget.CardView>
+</androidx.core.widget.NestedScrollView>
+
 
 
 </RelativeLayout>

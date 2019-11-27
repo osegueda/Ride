@@ -47,7 +47,7 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="two_format_string">%1$s %2$s</string>
-    <string name="reservado">Reservado</string>
+    <string name="reservado">Cancelar</string>
 
 
 
@@ -91,7 +91,9 @@
     <string name="fcm_message">FCM Message</string>
 
     <string name="reservar_btn">Reservar</string>
-
+    <string name="title_reservacion">Reservación</string>
+    <string name="tu_reserva">Tu viaje</string>
+    <string name="detalle_de_reserva">Detalle de reserva</string>
 
 
 </resources>

@@ -1,6 +1,8 @@
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,17 +20,34 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReservationViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_row_rsv, parent, false)
+            .inflate(R.layout.list_row_card_rsv, parent, false)
         return ReservationViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
         holder.bindData()
 
-        holder.date_txt?.visibility= View.GONE
-        holder.status_txt?.visibility=View.GONE
-        holder.line1?.visibility=View.GONE
-        holder.line2?.visibility=View.GONE
+        fun transition(){
+            holder.card1?.visibility=View.VISIBLE
+            holder.arrowBtn?.setOnClickListener{
+                if (holder.card2?.visibility == View.GONE) {
+                    TransitionManager.beginDelayedTransition(
+                        holder.cardview,
+                        AutoTransition()
+                    )
+                    holder.card2?.visibility = View.VISIBLE
+                    holder.arrowBtn?.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
+                } else {
+                    TransitionManager.beginDelayedTransition(
+                        holder.cardview,
+                        AutoTransition()
+                    )
+                    holder.card2?.visibility = View.GONE
+                    holder.arrowBtn?.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
+                }
+            }
+        }
+
         holder.id_txt?.text = context.resources.getString(
             R.string.two_format_string,
             "ID:",
@@ -63,10 +82,10 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                     when(reservation.round_status){
 
                         "finished"->{
-                            holder.card1?.visibility=View.GONE
-                            holder.card2?.visibility=View.VISIBLE
-                            //holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_red_dark))
-                            holder.card2?.background?.setColorFilter(Color.parseColor("#EB1B1B"), PorterDuff.Mode.SRC_ATOP)
+                            holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
+                            holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
+                            transition()
+                            holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_red_dark))
                             holder.result_txt?.text=context.getString(R.string.reservation_finished)
                             holder.result_txt?.textSize=20.0F
 
@@ -74,20 +93,19 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
 
                         "available"->{
                             Log.d("USER","SI ESTA")
-                            holder.card1?.visibility=View.GONE
-                            //holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
-                            //holder.card2?.visibility=View.VISIBLE
-                            holder.card2?.background?.setColorFilter(Color.parseColor("#ff669900"), PorterDuff.Mode.SRC_ATOP)
+                            holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
+                            holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
+                            transition()
+                            holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_green_dark))
                             holder.result_txt?.text=context.getString(R.string.reservation_result)
                             holder.result_txt?.textSize=20.0F
                         }
 
                         "ongoing"->{
-
-                            holder.card1?.visibility=View.GONE
-                            holder.card2?.visibility=View.VISIBLE
-                            //holder.card2?.setBackgroundColor(ContextCompat.getColor(context,R.color.yellow))
-                            holder.card2?.background?.setColorFilter(Color.parseColor("#FFC107"), PorterDuff.Mode.SRC_ATOP)
+                            holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
+                            holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
+                            transition()
+                            holder.card2?.setBackgroundColor(ContextCompat.getColor(context,R.color.yellow))
                             holder.result_txt?.text=context.getString(R.string.reservation_begun)
                             holder.result_txt?.textSize=20.0F
                         }
@@ -99,7 +117,9 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
 
         } else {
             //holder.container!!.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_red_dark))
-            holder.card1?.visibility=View.VISIBLE
+            holder.buttonrsv?.text=context.resources.getString(R.string.reservar_btn)
+            holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#46B64B"), PorterDuff.Mode.SRC_ATOP)
+            holder.card1?.visibility=View.GONE
             holder.card2?.visibility=View.GONE
             Log.d("USER","NO ESTA")
         }
