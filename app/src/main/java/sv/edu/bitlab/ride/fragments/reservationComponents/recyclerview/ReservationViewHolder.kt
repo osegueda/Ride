@@ -32,17 +32,17 @@ class ReservationViewHolder(itemView: View, val listener: ReservationItemListene
         card2=itemView.id_card2
         id_container=itemView.id_container
         //para mostrar el numero de ronda
-        result_number=itemView.result_round_number_txt
+        result_number=itemView.result_round_number_txt//este
         result_txt=itemView.result_txt
 
 
 
-        id_txt=itemView.id_round
+        id_txt=itemView.id_round//este
         status_txt=itemView.id_round_status
         date_txt=itemView.id_txt_date
-        count_txt=itemView.id_reservation_count
-        round_txt=itemView.id_round_number
-        schedule_txt=itemView.id_schedule
+        count_txt=itemView.id_reservation_count//este
+        round_txt=itemView.id_round_number//este
+        schedule_txt=itemView.id_schedule//este
         buttonrsv=itemView.button_rsv
 
         line1=itemView.id_line_date

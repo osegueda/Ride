@@ -57,6 +57,7 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
 
                         listener.onItemClickReservation(position,reservation.round_status!!)
 
+
                     }
 
                     when(reservation.round_status){
@@ -76,7 +77,6 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                             holder.card1?.visibility=View.GONE
                             //holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
                             //holder.card2?.visibility=View.VISIBLE
-                            //holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_green_dark))
                             holder.card2?.background?.setColorFilter(Color.parseColor("#ff669900"), PorterDuff.Mode.SRC_ATOP)
                             holder.result_txt?.text=context.getString(R.string.reservation_result)
                             holder.result_txt?.textSize=20.0F
