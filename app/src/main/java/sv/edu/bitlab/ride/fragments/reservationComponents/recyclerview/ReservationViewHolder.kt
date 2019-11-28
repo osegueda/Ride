@@ -2,6 +2,7 @@ package sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview
 
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -16,6 +17,9 @@ class ReservationViewHolder(itemView: View, val listener: ReservationItemListene
     var round_txt:TextView?=null
     var schedule_txt:TextView?=null
     var buttonrsv:Button?=null
+    var image: ImageView?=null
+    var cardviewtag: CardView?=null
+    var textestado: TextView?=null
 
     //detalle de viaje
     var cardview: CardView?=null
@@ -39,9 +43,12 @@ class ReservationViewHolder(itemView: View, val listener: ReservationItemListene
         //data de estado de viaje
         id_txt=itemView.id_round//este
         count_txt=itemView.id_reservation_count//este
-        round_txt=itemView.id_round_number//este
+        round_txt=itemView.id_actual_round//este
         schedule_txt=itemView.id_schedule//este
         buttonrsv=itemView.button_rsv
+        image=itemView.id_image_bus
+        cardviewtag=itemView.id_card_estado
+        textestado=itemView.id_estado_rsv
 
        // listener.onViewDetalleOrden(id_txt!!,fecha_txt!!,total_txt!!,status_txt!!,this.adapterPosition)
 

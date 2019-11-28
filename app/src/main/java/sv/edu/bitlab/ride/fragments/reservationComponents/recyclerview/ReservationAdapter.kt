@@ -1,4 +1,5 @@
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.transition.AutoTransition
@@ -48,24 +49,24 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
             }
         }
 
-        holder.id_txt?.text = context.resources.getString(
+        /*holder.id_txt?.text = context.resources.getString(
             R.string.two_format_string,
             "ID:",
             reservations[position].id
-        )
+        )*/
         holder.round_txt?.text = context.resources.getString(
             R.string.two_format_string,
-            "Round Number:",
+            "Viaje N° ",
             reservations[position].round.toString()
         )
         holder.schedule_txt?.text = context.resources.getString(
             R.string.two_format_string,
-            "Schedule:",
+            ":",
             reservations[position].schedule
         )
         holder.count_txt?.text = context.resources.getString(
             R.string.two_format_string,
-            "Available Slots:",
+            "",
             reservations[position].pplsize.toString()
         )
         Log.d("backgorund","$user, $reservations")
@@ -84,6 +85,8 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                         "finished"->{
                             holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
                             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
+                            holder.cardviewtag?.setCardBackgroundColor(Color.parseColor("#D3F1062C"))
+                            holder.textestado?.text="Viaje finalizado"
                             transition()
                             holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_red_dark))
                             holder.result_txt?.text=context.getString(R.string.reservation_finished)
@@ -95,6 +98,9 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                             Log.d("USER","SI ESTA")
                             holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
                             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
+                            holder.image?.setColorFilter(Color.argb(0, 255, 255, 255),   PorterDuff.Mode.SRC_ATOP)
+                            holder.cardviewtag?.setCardBackgroundColor(Color.parseColor("#C83EAC42"))
+                            holder.textestado?.text="Viaje en espera"
                             transition()
                             holder.card2?.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_green_dark))
                             holder.result_txt?.text=context.getString(R.string.reservation_result)
@@ -104,6 +110,8 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                         "ongoing"->{
                             holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
                             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
+                            holder.cardviewtag?.setCardBackgroundColor(Color.parseColor("#D3FFEB3B"))
+                            holder.textestado?.text="Viaje en camino"
                             transition()
                             holder.card2?.setBackgroundColor(ContextCompat.getColor(context,R.color.yellow))
                             holder.result_txt?.text=context.getString(R.string.reservation_begun)
@@ -118,9 +126,12 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
         } else {
             //holder.container!!.setBackgroundColor(ContextCompat.getColor(context,android.R.color.holo_red_dark))
             holder.buttonrsv?.text=context.resources.getString(R.string.reservar_btn)
+            holder.image?.setColorFilter(Color.argb(150, 155, 155, 155),   PorterDuff.Mode.SRC_ATOP)
             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#46B64B"), PorterDuff.Mode.SRC_ATOP)
-            holder.card1?.visibility=View.GONE
-            holder.card2?.visibility=View.GONE
+            holder.cardviewtag?.setCardBackgroundColor(Color.parseColor("#9500BCD4"))
+            holder.textestado?.text="Listo para reservar"
+            //holder.card1?.visibility=View.GONE
+            //holder.card2?.visibility=View.GONE
             Log.d("USER","NO ESTA")
         }
 

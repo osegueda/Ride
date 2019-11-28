@@ -24,9 +24,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/id_card_estado"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                app:cardBackgroundColor="#C83EAC42"
+                app:cardCornerRadius="23dp"
+                android:elevation="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/id_image_bus">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp">
+                    <TextView
+                        android:id="@+id/id_estado_rsv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="6dp"
+                        android:textStyle="bold"
+                        android:text="Listo para reservar"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/id_image_bus"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/content_desc_micro"
@@ -47,7 +75,7 @@
                 android:elevation="12dp"
                 app:cardCornerRadius="25dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView">
+                app:layout_constraintTop_toBottomOf="@+id/id_image_bus">
 
                 <ImageView
                     android:id="@+id/circleImage"
@@ -60,12 +88,12 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/id_actual_round"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="@string/title_reservacion"
+                android:text="@string/round"
                 app:layout_constraintBottom_toTopOf="@+id/desc"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toTopOf="@+id/view" />
@@ -79,7 +107,25 @@
                 android:text="@string/tu_reserva"
                 android:textColor="#8A000000"
                 app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
+                app:layout_constraintTop_toBottomOf="@+id/id_actual_round" />
+
+            <TextView
+                android:id="@+id/id_reservation_count"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="3dp"
+                android:text="0"
+                android:textSize="22sp"
+                android:textColor="@color/unicomer_white"
+                android:textAlignment="center"
+                android:background="@drawable/circular_txtview"
+                app:layout_constraintBottom_toTopOf="@+id/divider2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_image_bus" />
 
             <View
                 android:id="@+id/divider2"
@@ -105,49 +151,38 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider2">
 
                 <LinearLayout
-                    android:layout_marginTop="7dp"
                     android:layout_width="220dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:paddingStart="8dp"
-                        android:paddingEnd="0dp"
-                        android:id="@+id/id_round"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/reservation_id" />
-
-                    <TextView
-                        android:paddingStart="8dp"
-                        android:paddingEnd="0dp"
-                        android:id="@+id/id_reservation_count"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/reservation_count" />
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:layout_marginTop="7dp"
-                    android:layout_width="188dp"
-                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/id_round_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/round" />
-
+                        android:layout_marginBottom="1dp"
+                        style="@style/TextAppearance.AppCompat.Title"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="0dp"
+                        android:text="Horario" />
                     <TextView
                         android:id="@+id/id_schedule"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/schedule" />
+                        android:paddingStart="8dp"
+                        android:textSize="20sp"
+                        android:text="@string/schedule"
+                        android:textAlignment="center"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="188dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp"
+                    android:orientation="vertical">
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -181,6 +216,7 @@
                 android:id="@+id/id_detalle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                 tools:layout_editor_absoluteX="172dp">
 
