@@ -34,6 +34,7 @@ import sv.edu.bitlab.ride.fragments.mapComponents.MapFragment
 import sv.edu.bitlab.ride.fragments.recordComponents.RecordFragment
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.Coordinates
+import sv.edu.bitlab.ride.models.LatLang
 import sv.edu.bitlab.ride.models.User
 
 class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
     var fbAuth = FirebaseAuth.getInstance()
 
     private lateinit var user: User
-    val coordinates=Coordinates(11.0,12.2)
+    val coordinates=LatLang(11.0,12.2)
     private var listener:OnFragmentInteractionListener?=null
     var username: String? = null
 
@@ -138,7 +139,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
             FragmentsIndex.KEY_FRAGMENT_MAP->{
 
-                fragment= MapFragment.newInstance(obj as Coordinates)
+                fragment= MapFragment.newInstance(obj as LatLang)
                 transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                     android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 

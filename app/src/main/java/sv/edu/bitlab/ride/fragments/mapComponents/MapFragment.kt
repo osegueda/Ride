@@ -2,36 +2,47 @@ package sv.edu.bitlab.ride.fragments.mapComponents
 
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.*
 
 import sv.edu.bitlab.ride.R
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.MarkerOptions
 
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.Coordinates
+import sv.edu.bitlab.ride.models.LatLang
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class MapFragment : Fragment(),OnMapReadyCallback {
 
-
+    private var firestoredb = FirebaseDatabase.getInstance().getReference("reservations")
+    private lateinit var todayDate:String
     private lateinit var driverMaker:Marker
     private var listener: OnFragmentInteractionListener? = null
     private var framentView:View?=null
-   private lateinit var coordinates: Coordinates
+   private lateinit var coordinates: LatLang
     private var mMapView: MapView? = null
     private var googleMap: GoogleMap? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        getDate()
+
         Log.d("PARAMS","latitude ->${coordinates.latitude}  Longitude ->${coordinates.longitude}")
 
     }
@@ -93,20 +104,61 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         // For dropping a marker at a point on the Map
         val sydney = LatLng(13.707355, -89.251470)
 
-        driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("BITLAB").snippet("ELANIIN TECH COMPANY"))
+        driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+            googleMap.addMarker(MarkerOptions().position(sydney).title("ME"))
 
-
-
+        getLocation()
 
         // For zooming automatically to the location of the marker
-        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(19f).build()
+        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(17f).build() //19
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getDate(){
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = current.format(formatter)
+        todayDate=formatted
+    }
+    private fun getLocation(){
+
+
+        firestoredb.child(todayDate).child("location").addValueEventListener(object :
+            ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()){
+
+                    //dataSnapshot.children.forEach {  coord ->
+
+                        val coordinate = dataSnapshot.getValue(LatLang::class.java)
+                    val coor=LatLng(coordinate?.latitude!!,coordinate?.longitude!!)
+
+                        Log.d("LATLANG-coordinate","$coordinate")
+                       coordinates=coordinate
+                    driverMaker.position= coor
+
+                   // }
+
+                    Log.d("LATLANG-DRIVER LOCATION","$coordinates")
+                }else{
+
+                    Log.d("LATLANG","NO EXISTE")
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("The read failed: " + databaseError.code)
+            }
+        })
+
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance(coordinates: Coordinates) :MapFragment{
+        fun newInstance(coordinates: LatLang) :MapFragment{
 
             val fragment=MapFragment()
             fragment.coordinates =coordinates
