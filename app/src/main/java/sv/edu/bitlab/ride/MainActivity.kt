@@ -30,8 +30,10 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 import sv.edu.bitlab.ride.fragments.reservationComponents.ReservationFragment
 import sv.edu.bitlab.ride.fragments.locationComponents.LocationFragment
+import sv.edu.bitlab.ride.fragments.mapComponents.MapFragment
 import sv.edu.bitlab.ride.fragments.recordComponents.RecordFragment
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
+import sv.edu.bitlab.ride.models.Coordinates
 import sv.edu.bitlab.ride.models.User
 
 class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
     var fbAuth = FirebaseAuth.getInstance()
 
     private lateinit var user: User
-
+    val coordinates=Coordinates(11.0,12.2)
     private var listener:OnFragmentInteractionListener?=null
     var username: String? = null
 
@@ -120,9 +122,36 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
             }
 
 
+
         }
         transaction
-            .replace(R.id.container_fragments, fragment)
+            .replace(R.id.container_fragments, fragment!!)
+            .commit()
+    }
+
+    override fun onFragmentInteraction(index: FragmentsIndex,obj:Any) {
+
+        val transaction = supportFragmentManager.beginTransaction()
+        var fragment: Fragment? = null
+
+        when(index){
+
+            FragmentsIndex.KEY_FRAGMENT_MAP->{
+
+                fragment= MapFragment.newInstance(obj as Coordinates)
+                transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
+                    android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
+
+
+            }
+
+
+
+
+        }
+        transaction
+            .replace(R.id.container_fragments, fragment!!)
             .commit()
     }
 
@@ -154,7 +183,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
             .setOnClickListener{
                 Toast.makeText(this, "Location!", Toast.LENGTH_SHORT).show()
                 //listener?.listenTome()
-                listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_LOCATION)
+                listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_MAP,coordinates)
             }
         this.findViewById<LinearLayout>(R.id.container_layout_notifications)
             .setOnClickListener{

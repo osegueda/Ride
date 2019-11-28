@@ -50,7 +50,7 @@
 
     <string name="reservation_number"> 1</string>
     <string name="reservation_result"><b>Your round number</b></string>
-<string name="reservation_finished">Your Round has finished</string>
+    <string name="reservation_finished">Your Round has finished</string>
     <string name="reservation_begun">Your Round has begun</string>
 
 
@@ -62,9 +62,7 @@
     <string name="email_hint">Email</string>
 
 
-
     <!-- Firebase NOTIFICATIONS STRINGS-->
-
 
 
     <string name="quickstart_message">Click the SUBSCRIBE TO SERVICE button below to subscribe to the
@@ -88,7 +86,7 @@
     <string name="fcm_message">FCM Message</string>
 
     <string name="reservar_btn">Reservar</string>
-
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
