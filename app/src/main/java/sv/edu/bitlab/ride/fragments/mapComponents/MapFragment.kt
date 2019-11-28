@@ -104,13 +104,14 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         // For dropping a marker at a point on the Map
         val sydney = LatLng(13.707355, -89.251470)
 
-        driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+        //driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+        driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.fromResource(R.drawable.bus4)))
             googleMap.addMarker(MarkerOptions().position(sydney).title("ME"))
 
         getLocation()
 
         // For zooming automatically to the location of the marker
-        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(17f).build() //19
+        val cameraPosition = CameraPosition.Builder().target(sydney).zoom(15f).build() //19
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
     @RequiresApi(Build.VERSION_CODES.O)
