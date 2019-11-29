@@ -40,13 +40,16 @@
     <string name="date">Date</string>
     <string name="status">Round Status</string>
     <string name="reservation_count">Reservation Count</string>
-    <string name="round">Round</string>
+    <string name="round">Viaje</string>
     <string name="schedule">Schedule</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="two_format_string">%1$s %2$s</string>
+    <string name="reservado">Cancelar</string>
+
+
 
     <string name="reservation_number"> 1</string>
     <string name="reservation_result"><b>Your round number</b></string>
@@ -85,8 +88,20 @@
     <string name="msg_subscribe_failed">Failed to subscribe to service topic</string>
     <string name="fcm_message">FCM Message</string>
 
+    <!-- STRINGS FOR CARDVIEW 2.0-->
     <string name="reservar_btn">Reservar</string>
+
     <string name="title_activity_maps">Map</string>
+
+    <string name="tu_reserva">Ride</string>
+    <string name="listo_para_reservar">Listo para reservar</string>
+    <string name="viaje_en_espera">Viaje en espera</string>
+    <string name="viaje_en_camino">Viaje en camino</string>
+    <string name="viaje_finalizado">Viaje finalizado</string>
+    <string name="cupos">Cupos</string>
+    <string name="num_quantity_sit">0</string>
+    <string name="txt_horario">Horario</string>
+
 
 
 </resources>

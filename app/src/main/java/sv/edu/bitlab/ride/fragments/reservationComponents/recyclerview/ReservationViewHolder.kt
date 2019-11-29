@@ -2,51 +2,41 @@ package sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview
 
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.list_row_reservation.view.*
+import kotlinx.android.synthetic.main.list_row_card_rsv.view.*
 
 class ReservationViewHolder(itemView: View, val listener: ReservationItemListener) : RecyclerView.ViewHolder(itemView)  {
 
-    var card1:View?=null
-    var card2:View?=null
-
-    //card1
-    var id_txt: TextView? = null
-    var status_txt: TextView? =null
-    var date_txt: TextView?=null
+    //contenido reserva
     var count_txt:TextView? =null
     var round_txt:TextView?=null
     var schedule_txt:TextView?=null
-    var container:View?=null
+    var buttonrsv:Button?=null
+    var image: ImageView?=null
+    var cardviewtag: CardView?=null
+    var textestado: TextView?=null
+    var check:CardView?=null
 
-    //card2
-
+    //detalle de viaje
     var result_number:TextView?=null
-    var result_txt:TextView?=null
+
+
+
     fun bindData() {
+        //data de estado de viaje
+        count_txt=itemView.id_reservation_count//este
+        round_txt=itemView.id_actual_round//este
+        schedule_txt=itemView.id_schedule//este
+        buttonrsv=itemView.button_rsv
+        image=itemView.id_image_bus
+        cardviewtag=itemView.id_card_estado
+        textestado=itemView.id_estado_rsv
+        check=itemView.id_check
 
-        card1=itemView.test1
-        card2=itemView.test2
-
-        result_number=itemView.result_round_number_txt
-        result_txt=itemView.result_txt
-
-
-
-        id_txt=itemView.idTxt
-        status_txt=itemView.statusTxt
-        date_txt=itemView.dateTxt
-        count_txt=itemView.countTxt
-        round_txt=itemView.roundTxt
-        schedule_txt=itemView.scheduleTxt
-        container=itemView.item_container_reservation
-
-
-
-       // listener.onViewDetalleOrden(id_txt!!,fecha_txt!!,total_txt!!,status_txt!!,this.adapterPosition)
-
-        
     }
 
 
