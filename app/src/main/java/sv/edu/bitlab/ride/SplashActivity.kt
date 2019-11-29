@@ -1,12 +1,28 @@
 package sv.edu.bitlab.ride
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
+
+
+
+
+
+
     private val mauth = FirebaseAuth.getInstance()
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -19,6 +35,7 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }*/
 
+       // requestPermissions()
         val background = object : Thread(){
             override fun run() {
                 try {
@@ -33,4 +50,9 @@ class SplashActivity : AppCompatActivity() {
         }
         background.start()
     }
+
+
+
+
+
 }

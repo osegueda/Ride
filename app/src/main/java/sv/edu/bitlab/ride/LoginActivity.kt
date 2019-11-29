@@ -1,8 +1,10 @@
 package sv.edu.bitlab.ride
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +12,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         val loginbtn = findViewById<View>(R.id.btn_login)
 
-
+ requestPermissions()
         loginbtn.setOnClickListener {
             Toast.makeText(applicationContext,"CLICKER ON LGIN",Toast.LENGTH_LONG).show()
             login()
@@ -97,6 +100,37 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+
+            PERMISSION_ID_COARSE_FINE_LOCATION-> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+
+                    Log.d("PERMITIONS","GRANTED")
+                } else {
+
+                    Log.d("PERMITIONS","NOT GRANTED")
+                }
+                return
+            }
+
+            // Add other 'when' lines to check for other
+            // permissions this app might request.
+            else -> {
+                // Ignore all other requests.
+            }
+        }
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_ID_COARSE_FINE_LOCATION
+        )
+    }
     override fun onBackPressed() {
         super.onBackPressed()
         //finishAffinity()
