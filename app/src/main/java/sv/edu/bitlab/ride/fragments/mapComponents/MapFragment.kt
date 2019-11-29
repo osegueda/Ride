@@ -54,7 +54,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
 
         getDate()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        getLastLocation()
+
 
         Log.d("PARAMS","latitude ->${coordinates.latitude}  Longitude ->${coordinates.longitude}")
 
@@ -69,6 +69,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         mMapView = view.findViewById(R.id.mapView)
         mMapView?.onCreate(savedInstanceState)
         mMapView?.getMapAsync(this)
+        getLastLocation()
 
 
         return view
@@ -119,7 +120,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
 
         //driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
         driverMaker= googleMap.addMarker(MarkerOptions().position(elaniin).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.fromResource(R.drawable.bus4)))
-        userMaker= googleMap.addMarker(MarkerOptions().position(elaniin).title("ME"))
+
 
         getLocation()
 
@@ -155,8 +156,9 @@ class MapFragment : Fragment(),OnMapReadyCallback {
                     if (location == null) {
                         requestNewLocationData()
                     } else {
-                        val coordinate= LatLang(location.latitude,location.longitude)
-                        userMaker.position= LatLng(location.latitude,location.longitude)
+                        val coordinate= LatLng(location.latitude,location.longitude)
+                        userMaker= googleMap!!.addMarker(MarkerOptions().position(coordinate).title("ME"))
+                            //userMaker.position = LatLng(location.latitude, location.longitude)
 
                         Log.d("LOCATION-LONG-LAST","${location.longitude}")
                         Log.d("LOCATION-LAT-LAST","${location.latitude}")
