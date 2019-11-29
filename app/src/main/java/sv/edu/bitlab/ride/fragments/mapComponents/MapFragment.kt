@@ -240,6 +240,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
 
             val coordinate= LatLang(mLastLocation.latitude,mLastLocation.longitude)
             userMaker.position= LatLng(mLastLocation.latitude,mLastLocation.longitude)
+          //  Toast.makeText(requireContext(),"lat->${mLastLocation.latitude} lang->${mLastLocation.longitude} ",Toast.LENGTH_LONG).show()
             Log.d("LOCATION-LONG","${mLastLocation.longitude}")
             Log.d("LOCATION-LAT","${mLastLocation.latitude}")
         }
