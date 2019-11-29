@@ -1,5 +1,5 @@
 package sv.edu.bitlab.ride.fragments.reservationComponents
-import ReservationAdapter
+
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -25,9 +25,8 @@ import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationAdapter
 
 import sv.edu.bitlab.ride.APPLICATION_NAME
-import sv.edu.bitlab.ride.R
-import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
-import sv.edu.bitlab.ride.models.User
+
+
 
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
