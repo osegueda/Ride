@@ -1,7 +1,6 @@
 package sv.edu.bitlab.ride.fragments.reservationComponents
 import ReservationAdapter
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -18,10 +16,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
+
+
+
+import sv.edu.bitlab.ride.R
+import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
+import sv.edu.bitlab.ride.models.User
+import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationAdapter
+
 import sv.edu.bitlab.ride.APPLICATION_NAME
 import sv.edu.bitlab.ride.R
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.User
+
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationViewHolder
 import sv.edu.bitlab.unicomer.models.Reservation
 import java.time.LocalDateTime
@@ -50,7 +57,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         super.onCreate(savedInstanceState)
         reservations= ArrayList()
         active_reservations= ArrayList()
-
+            Log.d("ARGS","${this.arguments?.get("name")}")
         Log.d("USER-FRAG","$user")
 
 
@@ -174,6 +181,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         })
 
     }
+
 
 
 

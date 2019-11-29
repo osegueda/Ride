@@ -65,9 +65,7 @@
     <string name="email_hint">Email</string>
 
 
-
     <!-- Firebase NOTIFICATIONS STRINGS-->
-
 
 
     <string name="quickstart_message">Click the SUBSCRIBE TO SERVICE button below to subscribe to the
@@ -92,6 +90,9 @@
 
     <!-- STRINGS FOR CARDVIEW 2.0-->
     <string name="reservar_btn">Reservar</string>
+
+    <string name="title_activity_maps">Map</string>
+
     <string name="tu_reserva">Ride</string>
     <string name="listo_para_reservar">Listo para reservar</string>
     <string name="viaje_en_espera">Viaje en espera</string>
@@ -100,6 +101,7 @@
     <string name="cupos">Cupos</string>
     <string name="num_quantity_sit">0</string>
     <string name="txt_horario">Horario</string>
+
 
 
 </resources>
