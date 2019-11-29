@@ -101,7 +101,11 @@
     <string name="cupos">Cupos</string>
     <string name="num_quantity_sit">0</string>
     <string name="txt_horario">Horario</string>
-
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="xxxxxxx">xxxxxxx</string>
+    <string name="xxxxx">xxxxx</string>
+    <string name="txt_horario_title">Horario:</string>
+    <string name="fecha_txt_title">Fecha:</string>
 
 
 </resources>

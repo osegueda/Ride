@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.list_row_record.view.*
+import kotlinx.android.synthetic.main.list_row_history.view.*
 import kotlinx.android.synthetic.main.list_row_reservation.view.*
 
 class RecordViewHolder(itemView: View, val listener: RecordItemListener) : RecyclerView.ViewHolder(itemView)  {
@@ -12,9 +12,9 @@ class RecordViewHolder(itemView: View, val listener: RecordItemListener) : Recyc
 
 
     var date_txt: TextView?=null
-    var round_txt: TextView?=null
+
     var schedule_txt: TextView?=null
-    var container: View?=null
+
 
 
     fun bindData() {
@@ -22,10 +22,9 @@ class RecordViewHolder(itemView: View, val listener: RecordItemListener) : Recyc
 
 
 
-        date_txt=itemView.fecha_txt
+        date_txt=itemView.id_date
 
-        round_txt=itemView.round_txt
-        schedule_txt=itemView.schedule_txt
+        schedule_txt=itemView.id_horario
         //container=itemView.item_container_reservation
 
 
