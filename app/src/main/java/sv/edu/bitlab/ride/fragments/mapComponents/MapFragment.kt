@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.type.LatLng
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.Coordinates
 import sv.edu.bitlab.ride.models.LatLang
@@ -106,7 +107,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
 
         //driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
         driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.fromResource(R.drawable.bus4)))
-            googleMap.addMarker(MarkerOptions().position(sydney).title("ME"))
+        googleMap.addMarker(MarkerOptions().position(sydney).title("ME"))
 
         getLocation()
 
