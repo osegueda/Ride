@@ -53,7 +53,7 @@
 
     <string name="reservation_number"> 1</string>
     <string name="reservation_result"><b>Your round number</b></string>
-<string name="reservation_finished">Your Round has finished</string>
+    <string name="reservation_finished">Your Round has finished</string>
     <string name="reservation_begun">Your Round has begun</string>
 
 
@@ -90,10 +90,16 @@
     <string name="msg_subscribe_failed">Failed to subscribe to service topic</string>
     <string name="fcm_message">FCM Message</string>
 
+    <!-- STRINGS FOR CARDVIEW 2.0-->
     <string name="reservar_btn">Reservar</string>
-    <string name="title_reservacion">Reservación</string>
     <string name="tu_reserva">Ride</string>
-    <string name="detalle_de_reserva">Detalle de reserva</string>
+    <string name="listo_para_reservar">Listo para reservar</string>
+    <string name="viaje_en_espera">Viaje en espera</string>
+    <string name="viaje_en_camino">Viaje en camino</string>
+    <string name="viaje_finalizado">Viaje finalizado</string>
+    <string name="cupos">Cupos</string>
+    <string name="num_quantity_sit">0</string>
+    <string name="txt_horario">Horario</string>
 
 
 </resources>
