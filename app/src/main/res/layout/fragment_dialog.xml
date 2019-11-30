@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:gravity="center"
-            android:textColor="@color/login_colorEnd"
+            android:textColor="@color/loginColorEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Problemas para iniciar sesion?"/>

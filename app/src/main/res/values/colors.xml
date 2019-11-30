@@ -3,8 +3,8 @@
     <color name="colorPrimary">#055EA9</color>
     <color name="colorPrimaryDark">#055EA9</color>
     <color name="colorAccent">#FFF</color>
-    <color name="login_colorStart">#055EA9</color>
-    <color name="login_colorEnd">#053055</color>
+    <color name="loginColorStart">#055EA9</color>
+    <color name="loginColorEnd">#053055</color>
     <color name="colorWhite">#FFF</color>
 
 </resources>

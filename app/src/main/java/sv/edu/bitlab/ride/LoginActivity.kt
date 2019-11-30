@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         img_pastillas = findViewById(R.id.imageView2)
-        img_pastillas!!.setImageResource(R.drawable.ic_pastillas)
+        img_pastillas!!.setImageResource(R.drawable.ic_pastillas2)
 
         btnIngresar = findViewById(R.id.button)
 
