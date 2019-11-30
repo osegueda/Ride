@@ -25,6 +25,7 @@ import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationAdapter
 
 import sv.edu.bitlab.ride.APPLICATION_NAME
+import sv.edu.bitlab.ride.RESERVATION_MAX_CAPACITY
 
 
 
@@ -185,13 +186,15 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
 
     fun writeFirstRoundOfDay(){
-        val reservationOfDay = Reservation(true,today_date,"",11,1,"7:00AM-9:00AM","available")
+        val reservationOfDay = Reservation(true,today_date,"",
+            RESERVATION_MAX_CAPACITY,1,"7:00AM-9:00AM","available")
         firestoredb.child("$today_date/rounds").push().setValue(reservationOfDay)
     }
     fun writeNewRound(){
 
         val roundNumber= active_reservations!![0].round!!+1
-        val newround = Reservation(true,today_date,"",11,roundNumber,"7:00AM-9:00AM","available")
+        val newround = Reservation(true,today_date,"",
+            RESERVATION_MAX_CAPACITY,roundNumber,"7:00AM-9:00AM","available")
         firestoredb.child("$today_date/active_rounds").removeValue()
         firestoredb.child("$today_date/rounds").push().setValue(newround)
         Log.d("NEW-ROUND","THE ACTIVE ROUND IS ->$roundNumber ")
