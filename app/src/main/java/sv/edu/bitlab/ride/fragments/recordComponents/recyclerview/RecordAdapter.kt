@@ -17,7 +17,7 @@ class RecordAdapter ( var history:ArrayList<UserHistory>, val listener: RecordVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_row_record, parent, false)
+            .inflate(R.layout.list_row_history, parent, false)
         return RecordViewHolder(view, listener)
     }
 
@@ -25,7 +25,7 @@ class RecordAdapter ( var history:ArrayList<UserHistory>, val listener: RecordVi
         holder.bindData()
 
         holder.date_txt?.text=history[position].date
-        holder.round_txt?.text=history[position].round.toString()
+        //holder.round_txt?.text=history[position].round.toString()
         holder.schedule_txt?.text=history[position].schedule
 
 

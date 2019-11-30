@@ -44,7 +44,7 @@ class RecordFragment : Fragment(),RecordViewHolder.RecordItemListener {
        // Log.d("USER","${mauth.currentUser?.email}")
          Log.d("USER", user)
         Log.d("INIT","the arrayList is -> $history")
-    Toast.makeText(requireContext(),"im in record",Toast.LENGTH_LONG).show()
+    //Toast.makeText(requireContext(),"im in record",Toast.LENGTH_LONG).show()
 
     }
 

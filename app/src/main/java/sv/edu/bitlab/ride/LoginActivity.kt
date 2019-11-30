@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
  requestPermissions()
         loginbtn.setOnClickListener {
-            Toast.makeText(applicationContext,"CLICKER ON LGIN",Toast.LENGTH_LONG).show()
+            //Toast.makeText(applicationContext,"CLICKER ON LGIN",Toast.LENGTH_LONG).show()
             login()
         }
 
@@ -82,12 +82,12 @@ class LoginActivity : AppCompatActivity() {
                     editor.apply()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
-                    Toast.makeText(applicationContext, "Incio sesión exitosamente :)", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(applicationContext, "Incio sesión exitosamente :)", Toast.LENGTH_LONG).show()
                     Log.d("testing","success to log in")
                 } else {
                     Log.d("testing","failed to log in -> ${task.exception}")
 
-                    Toast.makeText(applicationContext, "Error en iniciar sesión :(", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Failed to log in ", Toast.LENGTH_SHORT).show()
                     Log.d("testing","failed to log in")
                 }
             }.addOnFailureListener { exception ->

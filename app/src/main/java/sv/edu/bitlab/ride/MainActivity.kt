@@ -71,8 +71,8 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
         init()
 
 
-
-        notifications()
+        //unsubscribe()
+       notifications()
         getToken()
 
     }
@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
         this.findViewById<LinearLayout>(R.id.container_layout_reservation)
             .setOnClickListener {
-                Toast.makeText(this, "Reservations!", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this, "Reservations!", Toast.LENGTH_SHORT).show()
                 // listener?.listenTome()
                 listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_RESERVATION)
 
@@ -176,19 +176,19 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
         this.findViewById<LinearLayout>(R.id.container_layout_settings)
             .setOnClickListener {
-                Toast.makeText(this, "Settings!", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this, "Settings!", Toast.LENGTH_SHORT).show()
                 //listener?.listenTome()
                 listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_RECORD)
             }
         this.findViewById<LinearLayout>(R.id.container_layout_location)
             .setOnClickListener{
-                Toast.makeText(this, "Location!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Location!", Toast.LENGTH_SHORT).show()
                 //listener?.listenTome()
                 listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_MAP,coordinates)
             }
         this.findViewById<LinearLayout>(R.id.container_layout_notifications)
             .setOnClickListener{
-                Toast.makeText(this, "Notification!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Notification!", Toast.LENGTH_SHORT).show()
                 //listener?.listenTome()
                 listener?.onFragmentInteraction(FragmentsIndex.KEY_FRAGMENT_NOTIFICATIONS)
             }
@@ -239,6 +239,27 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
                 //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
             }
         // [END subscribe_topics]
+
+
+
+    }
+
+    private fun unsubscribe(){
+
+        Log.d("NOTIFICATION", "unsubscribe to service topic")
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("service")
+            .addOnCompleteListener { task ->
+                var msg = "SUSCRIPTION SUCCESS"
+                if (!task.isSuccessful) {
+                    msg = "SUSCRIPTION FAILED"
+                }
+                Log.d("NOTIFICATION", msg)
+                //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
+        // [END subscribe_topics]
+
+
 
     }
 

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
-
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 import sv.edu.bitlab.ride.R
@@ -364,6 +364,44 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         }
 
         return reserv?.get(0)?.id.toString()
+    }
+
+    private fun subscribe(round:String){
+
+        Log.d("NOTIFICATION", "Subscribing to service topic")
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().subscribeToTopic("round$round")
+            .addOnCompleteListener { task ->
+                var msg = "SUSCRIPTION SUCCESS"
+                if (!task.isSuccessful) {
+                    msg = "SUSCRIPTION FAILED"
+                }
+                Log.d("NOTIFICATION", msg)
+                //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
+        // [END subscribe_topics]
+
+
+
+    }
+
+    private fun unsubscribe(round:String){
+
+        Log.d("NOTIFICATION", "unsubscribe to service topic")
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("round$round")
+            .addOnCompleteListener { task ->
+                var msg = "SUSCRIPTION SUCCESS"
+                if (!task.isSuccessful) {
+                    msg = "SUSCRIPTION FAILED"
+                }
+                Log.d("NOTIFICATION", msg)
+                //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
+        // [END subscribe_topics]
+
+
+
     }
     
     companion object {

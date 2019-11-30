@@ -33,6 +33,8 @@
 
     <string name="lottie_fragment_reservations_part1"><b>Loading data from server</b>  </string>
     <string name="lottie_fragment_reservations_part2">Please wait</string>
+    <string name="lottie_fragment_map_part1">The Driver hasn\'t activated the service</string>
+    <string name="lottie_fragment_map_part2">Come back later</string>
 
 
     <!-- Reservation cardview (list_row_reservation)-->
