@@ -35,6 +35,8 @@
     <string name="lottie_fragment_reservations_part2">Please wait</string>
     <string name="lottie_fragment_map_part1">The Driver hasn\'t activated the service</string>
     <string name="lottie_fragment_map_part2">Come back later</string>
+    <string name="lottie_fragment_reservations_transact_part1"><b>Generating Reservation</b>  </string>
+    <string name="lottie_fragment_reservations_transact_part2">Please wait</string>
 
 
     <!-- Reservation cardview (list_row_reservation)-->
@@ -49,6 +51,7 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="two_format_string">%1$s %2$s</string>
+
     <string name="reservado">Cancelar</string>
 
 

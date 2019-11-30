@@ -1,6 +1,7 @@
 package sv.edu.bitlab.ride.fragments.reservationComponents
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.android.synthetic.main.fragment_reservation.*
+import kotlinx.android.synthetic.main.fragment_reservation.view.*
 
 
 import sv.edu.bitlab.ride.R
@@ -25,6 +28,7 @@ import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationAdapter
 
 import sv.edu.bitlab.ride.APPLICATION_NAME
+import sv.edu.bitlab.ride.LoginActivity
 import sv.edu.bitlab.ride.RESERVATION_MAX_CAPACITY
 
 
@@ -50,6 +54,10 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
     val calendar = Calendar.getInstance()
     private lateinit var user: User
     lateinit var  active_round:String
+  //  private lateinit var lottieLoadingTransac:View
+   // private lateinit var lottieRedBus:View
+   // private lateinit var lottieYellowBus:View
+  //  private lateinit var lottieBlueBus:View
 
 
 
@@ -70,6 +78,10 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
     ): View? {
         val view=inflater.inflate(R.layout.fragment_reservation, container, false)
         fragmentView=view
+//        lottieBlueBus=view.findViewById(R.id.animation_view_bus_blue)
+      //  lottieRedBus=view.findViewById(R.id.animation_view_bus_red)
+     //   lottieYellowBus=view.findViewById(R.id.animation_view_bus_red)
+        //lottieLoadingTransac=view.findViewById(R.id.animation_xml_transcation)
         return view
     }
   @RequiresApi(Build.VERSION_CODES.O)
@@ -204,7 +216,11 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
             .setTitle("Confirmar Reservacion")
             .setMessage("Desea Reservar??")
             .setPositiveButton("Reservar") { _, _ ->
+
+              //  fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.GONE
+              // fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.VISIBLE
                 pushReservation()
+
             }
             .setNegativeButton("Cancelar") { _, _ ->
                 Toast.makeText(requireContext(), "No", Toast.LENGTH_LONG).show()
@@ -238,6 +254,8 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
             override fun doTransaction(mutableData: MutableData): Transaction.Result {
                 val field = mutableData.getValue(Reservation::class.java)
                 Log.d("CHILD","$field")
+
+
 
 
                 if (field!!.users.contains(user.email)) {
@@ -282,10 +300,14 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
                 if (state!!){
 
+                    fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.GONE
+                    fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.VISIBLE
                     Snackbar.make(requireView(), "Reservation added successfully", Snackbar.LENGTH_LONG)
                         .setAction("Ok") {  }.show()
 
                 }else{
+                     fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.GONE
+                    fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.VISIBLE
                     pushReservation()
                    /* Snackbar.make(requireView(), "Server Error: Please try again", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Retry") { pushReservation() }.show()*/

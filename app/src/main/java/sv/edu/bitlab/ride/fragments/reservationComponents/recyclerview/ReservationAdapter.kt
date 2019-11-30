@@ -58,7 +58,7 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                             "Viaje N° ",
                             reservation.round.toString()
                         )
-
+                        holder.id_txt_cupo?.visibility=View.INVISIBLE
                     holder.buttonrsv?.setOnClickListener{
 
                         listener.onItemClickReservation(position,reservation.round_status!!)
@@ -69,28 +69,38 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                     when(reservation.round_status){
 
                         "finished"->{
+                            holder.image?.setAnimation("bus_red.json")
+                            holder.buttonrsv?.visibility=View.INVISIBLE
                             holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
                             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
                             holder.cardviewtag?.setCardBackgroundColor(Color.parseColor("#D3F1062C"))
                             holder.textestado?.text=context.resources.getString(R.string.viaje_finalizado)
+                            holder.textestado?.textSize=20.0F
+                            holder.textestado?.setTextColor(ContextCompat.getColor(context, R.color.unicomer_white))
                             holder.check?.visibility=View.VISIBLE
                         }
 
                         "available"->{
                             Log.d("USER","SI ESTA")
+                            holder.image?.setAnimation("bus_green.json")
                             holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
                             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
                             holder.image?.setColorFilter(Color.argb(0, 255, 255, 255),   PorterDuff.Mode.SRC_ATOP)
                             holder.cardviewtag?.setCardBackgroundColor(Color.parseColor("#C83EAC42"))
                             holder.textestado?.text=context.resources.getString(R.string.viaje_en_espera)
+                            holder.textestado?.textSize=20.0F
+                           // holder.textestado?.setTextColor(ContextCompat.getColor(context, android.R.color.black))
                             holder.check?.visibility=View.VISIBLE
                         }
 
                         "ongoing"->{
+                            holder.image?.setAnimation("bus_yellow.json")
                             holder.buttonrsv?.text=context.resources.getString(R.string.reservado)
                             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#EE0909"), PorterDuff.Mode.SRC_ATOP)
                             holder.cardviewtag?.setCardBackgroundColor(Color.parseColor("#D3FFEB3B"))
                             holder.textestado?.text=context.resources.getString(R.string.viaje_en_camino)
+                            holder.textestado?.textSize=20.0F
+                            holder.textestado?.setTextColor(ContextCompat.getColor(context, android.R.color.black))
                             holder.check?.visibility=View.VISIBLE
                         }
 
