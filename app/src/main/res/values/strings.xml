@@ -102,10 +102,13 @@
     <string name="num_quantity_sit">0</string>
     <string name="txt_horario">Horario</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
-    <string name="xxxxxxx">xxxxxxx</string>
-    <string name="xxxxx">xxxxx</string>
+    <string name="horario_value">xxxxxxx</string>
+    <string name="fecha_value">xxxxx</string>
     <string name="txt_horario_title">Horario:</string>
     <string name="fecha_txt_title">Fecha:</string>
+    <string name="txt_dialog">¿Seguro que desea cerrar sesión?</string>
+    <string name="txt_cancelar">Cancelar</string>
+    <string name="txt_aceptar">Aceptar</string>
 
 
 </resources>
