@@ -211,7 +211,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         firestoredb.child("$today_date/rounds").push().setValue(newround)
         Log.d("NEW-ROUND","THE ACTIVE ROUND IS ->$roundNumber ")
     }
-    private fun confirmReservation() {
+    private fun confirmReservation(round:String) {
         val alertDialog = AlertDialog.Builder(requireContext())
             .setTitle("Confirmar Reservacion")
             .setMessage("Desea Reservar??")
@@ -220,6 +220,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
               //  fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.GONE
               // fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.VISIBLE
                 pushReservation()
+                subscribe(round)
 
             }
             .setNegativeButton("Cancelar") { _, _ ->
@@ -227,12 +228,13 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
             }
         alertDialog.show()
     }
-    private fun deleteReservation() {
+    private fun deleteReservation(round: String) {
         val alertDialog = AlertDialog.Builder(requireContext())
             .setTitle("Eliminar Reservacion")
             .setMessage("Desea Elimnar su reservacion?")
             .setPositiveButton("Eliminar") { _, _ ->
                 updateUsers()
+                unsubscribe(round)
             }
             .setNegativeButton("Cancelar") { _, _ ->
                 Toast.makeText(requireContext(), "No", Toast.LENGTH_LONG).show()
@@ -352,7 +354,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
             }
         })
     }
-    override fun onItemClickReservation(position: Int,round_status:String) {
+    override fun onItemClickReservation(position: Int,round_status:String,round: String) {
         if (checkReservation()){
             /* Snackbar.make(requireView(), "you have already reserved", Snackbar.LENGTH_LONG)
                  .setAction("OK") {  }.show()*/
@@ -366,7 +368,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                  .setAction("OK") {  }.show()
                 }
                 "available"->{
-                    deleteReservation()
+                    deleteReservation(round)
                 }
                 "finished"->{ Snackbar.make(requireView(), "Your round is already finished, Thank you for using unicomer ride", Snackbar.LENGTH_INDEFINITE)
                     .setAction("OK") {  }.show()}
@@ -374,7 +376,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
         }else{
           //  Toast.makeText(requireContext(),"Card #$position",Toast.LENGTH_LONG).show()
-            confirmReservation()
+            confirmReservation(round)
         }
     }
 
@@ -388,9 +390,9 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         return reserv?.get(0)?.id.toString()
     }
 
-    private fun subscribe(round:String){
+     private fun subscribe(round:String){
 
-        Log.d("NOTIFICATION", "Subscribing to service topic")
+        Log.d("NOTIFICATION", "Subscribing to round-> $round")
         // [START subscribe_topics]
         FirebaseMessaging.getInstance().subscribeToTopic("round$round")
             .addOnCompleteListener { task ->
@@ -407,15 +409,15 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
     }
 
-    private fun unsubscribe(round:String){
+     private fun unsubscribe(round:String){
 
-        Log.d("NOTIFICATION", "unsubscribe to service topic")
+        Log.d("NOTIFICATION", "unsubscribe to round->$round")
         // [START subscribe_topics]
         FirebaseMessaging.getInstance().unsubscribeFromTopic("round$round")
             .addOnCompleteListener { task ->
-                var msg = "SUSCRIPTION SUCCESS"
+                var msg = "UNSUSCRIPTION SUCCESS"
                 if (!task.isSuccessful) {
-                    msg = "SUSCRIPTION FAILED"
+                    msg = "UNSUSCRIPTION FAILED"
                 }
                 Log.d("NOTIFICATION", msg)
                 //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

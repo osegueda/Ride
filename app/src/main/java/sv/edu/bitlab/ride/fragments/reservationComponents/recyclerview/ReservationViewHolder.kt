@@ -44,7 +44,7 @@ class ReservationViewHolder(itemView: View, val listener: ReservationItemListene
 
 
     interface ReservationItemListener{
-       fun onItemClickReservation(position: Int,round_status:String)
+       fun onItemClickReservation(position: Int,round_status:String,round:String)
 
     }
 }
