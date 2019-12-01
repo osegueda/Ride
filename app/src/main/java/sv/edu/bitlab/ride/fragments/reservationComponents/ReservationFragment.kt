@@ -104,8 +104,8 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
           Log.d("CONNECTION","No hay conexion")
           var animacion =fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml)
           animacion?.visibility=View.GONE
-          var animacion2 =fragmentView?.findViewById<ConstraintLayout>(R.id.lottie_connection)
-          animacion2?.visibility=View.VISIBLE
+          //var animacion2 =fragmentView?.findViewById<ConstraintLayout>(R.id.lottie_connection)
+        //  animacion2?.visibility=View.VISIBLE
       }
         getAllReservations()
         getActiveReservation()
