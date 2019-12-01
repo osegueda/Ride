@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.list_row_card_rsv.view.*
 
 class ReservationViewHolder(itemView: View, val listener: ReservationItemListener) : RecyclerView.ViewHolder(itemView)  {
@@ -16,10 +17,11 @@ class ReservationViewHolder(itemView: View, val listener: ReservationItemListene
     var round_txt:TextView?=null
     var schedule_txt:TextView?=null
     var buttonrsv:Button?=null
-    var image: ImageView?=null
+    var image: LottieAnimationView?=null
     var cardviewtag: CardView?=null
     var textestado: TextView?=null
     var check:CardView?=null
+    var id_txt_cupo:TextView?=null
 
     //detalle de viaje
     var result_number:TextView?=null
@@ -28,6 +30,7 @@ class ReservationViewHolder(itemView: View, val listener: ReservationItemListene
 
     fun bindData() {
         //data de estado de viaje
+        id_txt_cupo=itemView.id_txt_cupo
         count_txt=itemView.id_reservation_count//este
         round_txt=itemView.id_actual_round//este
         schedule_txt=itemView.id_schedule//este
@@ -41,7 +44,7 @@ class ReservationViewHolder(itemView: View, val listener: ReservationItemListene
 
 
     interface ReservationItemListener{
-       fun onItemClickReservation(position: Int,round_status:String)
+       fun onItemClickReservation(position: Int,round_status:String,round:String)
 
     }
 }

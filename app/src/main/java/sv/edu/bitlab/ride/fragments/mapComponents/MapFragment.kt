@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_map.*
 import sv.edu.bitlab.ride.PERMISSION_ID_COARSE_FINE_LOCATION
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.LatLang
@@ -47,6 +48,9 @@ class MapFragment : Fragment(),OnMapReadyCallback {
    private lateinit var coordinates: LatLang
     private var mMapView: MapView? = null
     private var googleMap: GoogleMap? = null
+    private lateinit var lottieView:View
+    private lateinit var mapViewxml:View
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +58,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
 
         getDate()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
+        getservice()
 
         Log.d("PARAMS","latitude ->${coordinates.latitude}  Longitude ->${coordinates.longitude}")
 
@@ -68,6 +72,11 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         framentView= view
         mMapView = view.findViewById(R.id.mapView)
         mMapView?.onCreate(savedInstanceState)
+
+        lottieView=view.findViewById(R.id.animation_xml2)
+        mapViewxml=view.findViewById(R.id.mapView)
+
+
         mMapView?.getMapAsync(this)
         getLastLocation()
 
@@ -184,6 +193,52 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         )
     }
 
+    private fun getservice(){
+
+
+        firestoredb.child(todayDate).child("service_status/activation").addValueEventListener(object :
+            ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()){
+
+                    //dataSnapshot.children.forEach {  coord ->
+
+                    val status = dataSnapshot.value
+
+                    if(status==true){
+
+                       // animation_xml2.visibility=View.GONE
+                        lottieView.visibility=View.GONE
+                        mapViewxml.visibility=View.VISIBLE
+
+
+                    }else{
+                        lottieView.visibility=View.VISIBLE
+                       // animation_xml2.visibility=View.VISIBLE
+                        mapViewxml.visibility=View.GONE
+
+                    }
+
+                    Log.d("STATUS","$status")
+
+
+
+                    // }
+
+
+                }else{
+
+                    Log.d("STATUS","NO EXISTE")
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("The read failed: " + databaseError.code)
+            }
+        })
+
+    }
     private fun getLocation(){
 
 

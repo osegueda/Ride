@@ -38,7 +38,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+
                 android:id="@+id/txt_date"
+
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,6 +52,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+
                 android:id="@+id/id_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,11 +66,14 @@
             <TextView
                 android:id="@+id/txt_horario"
                 style="@style/TextAppearance.AppCompat.Title"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/txt_horario_title"
                 app:layout_constraintBottom_toBottomOf="parent"
+
+
                 app:layout_constraintEnd_toEndOf="@+id/txt_date"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/txt_date" />

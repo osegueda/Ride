@@ -25,6 +25,9 @@ class RecordAdapter ( var history:ArrayList<UserHistory>, val listener: RecordVi
         holder.bindData()
 
         holder.date_txt?.text=history[position].date
+
+        //holder.round_txt?.text=history[position].round.toString()
+
         holder.schedule_txt?.text=history[position].schedule
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -53,13 +53,17 @@
 
             </androidx.cardview.widget.CardView>
 
-            <ImageView
+
+            <com.airbnb.lottie.LottieAnimationView
+
                 android:id="@+id/id_image_bus"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/content_desc_micro"
                 android:scaleType="centerCrop"
-                android:src="@drawable/busste"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="bus_green.json"
+                app:lottie_loop="true"
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -245,4 +249,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</FrameLayout>
