@@ -60,7 +60,7 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                             "Viaje N° ",
                             reservation.round.toString()
                         )
-                        holder.id_txt_cupo?.visibility=View.INVISIBLE
+                      //  holder.id_txt_cupo?.visibility=View.INVISIBLE
                     holder.buttonrsv?.setOnClickListener{
 
                         listener.onItemClickReservation(position,reservation.round_status!!,reservation.round.toString())
@@ -110,6 +110,7 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
                     }
 
                 } }) {
+            holder.id_txt_cupo?.visibility=View.INVISIBLE
             Log.d("USER","SI ESTA")
 
         } else {
