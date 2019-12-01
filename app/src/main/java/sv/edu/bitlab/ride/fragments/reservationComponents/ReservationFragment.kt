@@ -1,7 +1,11 @@
 package sv.edu.bitlab.ride.fragments.reservationComponents
 
 import android.content.Context
+
 import android.content.Intent
+
+import android.net.ConnectivityManager
+
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +32,7 @@ import sv.edu.bitlab.ride.models.User
 import sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview.ReservationAdapter
 
 import sv.edu.bitlab.ride.APPLICATION_NAME
+
 import sv.edu.bitlab.ride.LoginActivity
 import sv.edu.bitlab.ride.RESERVATION_MAX_CAPACITY
 
@@ -91,7 +96,17 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
         listView?.layoutManager = LinearLayoutManager(this.context!!)
 
         listView?.adapter = ReservationAdapter(user.email!!,reservations!!,active_reservations!!,this,requireContext())
+      //Lottie if connection doesn't exist
+      if (checkInternet()){
+          Log.d("CONNECTION","hay conexion")
 
+      }else {
+          Log.d("CONNECTION","No hay conexion")
+          var animacion =fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml)
+          animacion?.visibility=View.GONE
+          var animacion2 =fragmentView?.findViewById<ConstraintLayout>(R.id.lottie_connection)
+          animacion2?.visibility=View.VISIBLE
+      }
         getAllReservations()
         getActiveReservation()
         checkReservation()
@@ -161,10 +176,23 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
             }
         })
     }
+
+    private fun checkInternet():Boolean{
+        val cm = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        val isconnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting
+        var state= false
+        if (isconnected){
+            state=true
+        }
+        return state
+    }
+
     private fun getActiveReservation(){
         lateinit var idActiveRound:HashMap<String,String>
         firestoredb.child(today_date).child("active_rounds").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 if (dataSnapshot.exists()){
                     active_reservations?.clear()
                     dataSnapshot.children.forEach {reservation->

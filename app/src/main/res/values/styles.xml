@@ -16,4 +16,17 @@
         <item name="android:textColor">@color/unicomer_color</item>
     </style>
 
+    <style name="log_out_style">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:text">@string/txt_dialog</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/unicomer_blue</item>
+    </style>
+
+    <style name="DialogAnimation">
+    <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+    <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
 </resources>

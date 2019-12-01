@@ -6,9 +6,13 @@ import android.content.Context
 import android.app.PendingIntent
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 
 import android.view.Menu
 import android.view.MenuItem
@@ -27,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.android.synthetic.main.alert_logout_dialog.view.*
 
 import sv.edu.bitlab.ride.fragments.reservationComponents.ReservationFragment
 import sv.edu.bitlab.ride.fragments.locationComponents.LocationFragment
@@ -195,6 +200,7 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
 
     }
 
+
     ///MENU Y OPCION LOGOUT
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -204,14 +210,33 @@ class MainActivity : AppCompatActivity(),OnFragmentInteractionListener{
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.logout_action -> {
+    override fun onOptionsItemSelected(item: MenuItem):Boolean{
+        when(item.itemId){
+            R.id.logout_action -> {
 
-            signOut()
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
+                val mDialogView = LayoutInflater.from(this).inflate(R.layout.alert_logout_dialog,null)
+                val mBuilder = AlertDialog.Builder(this)
+                    .setView(mDialogView)
+
+                val mAlertDialog = mBuilder.create()
+                mAlertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                mAlertDialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
+                mAlertDialog.show()
+
+                mDialogView.id_cancel_btn.setOnClickListener{
+                    mAlertDialog.dismiss()
+
+                }
+
+                mDialogView.id_confirm_btn.setOnClickListener{
+                    mAlertDialog.dismiss()
+                    signOut()
+                }
+                return true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
         }
     }
 
