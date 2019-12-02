@@ -230,7 +230,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
     fun writeFirstRoundOfDay(){
         val reservationOfDay = Reservation(true,today_date,"",
-            RESERVATION_MAX_CAPACITY,1,"7:00AM-9:00AM","available")
+            RESERVATION_MAX_CAPACITY,1,"7:00PM-9:00AM","available")
         firestoredb.child("$today_date/rounds").push().setValue(reservationOfDay)
     }
     fun writeNewRound(){
