@@ -250,8 +250,9 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
               //  fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.GONE
               // fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.VISIBLE
+
                 pushReservation()
-                subscribe(round)
+               // subscribe(round)
 
             }
             .setNegativeButton("Cancelar") { _, _ ->
@@ -332,13 +333,14 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                 val state= snap?.users?.any { x->x.contains(user.email!!)}
 
                 if (state!!){
-
+                    subscribe(snap.round.toString())
                     fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.GONE
                     fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.VISIBLE
                     Snackbar.make(requireView(), "Reservation added successfully", Snackbar.LENGTH_LONG)
                         .setAction("Ok") {  }.show()
 
                 }else{
+                    unsubscribe(snap.round.toString())
                      fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.GONE
                     fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.VISIBLE
                     pushReservation()
