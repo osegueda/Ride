@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_map.*
 import sv.edu.bitlab.ride.PERMISSION_ID_COARSE_FINE_LOCATION
 import sv.edu.bitlab.ride.interfaces.OnFragmentInteractionListener
 import sv.edu.bitlab.ride.models.LatLang
+import sv.edu.bitlab.ride.notifications.generateBitmapDescriptorFromRes
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -128,7 +129,9 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         val elaniin = LatLng(13.707355, -89.251470)
 
         //driverMaker= googleMap.addMarker(MarkerOptions().position(sydney).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
-        driverMaker= googleMap.addMarker(MarkerOptions().position(elaniin).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.fromResource(R.drawable.bus4)))
+        //driverMaker= googleMap.addMarker(MarkerOptions().position(elaniin).title("Driver").snippet("Unicomer Driver").icon(BitmapDescriptorFactory.fromResource(R.drawable.bus4)))
+        driverMaker= googleMap.addMarker(MarkerOptions().position(elaniin).title("Driver").snippet("Unicomer Driver").icon(
+            generateBitmapDescriptorFromRes(requireContext(),R.drawable.ic_bus_driver)))
 
 
         getLocation()
