@@ -2,6 +2,7 @@
 package sv.edu.bitlab.ride.fragments.reservationComponents.recyclerview
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -30,6 +31,7 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
         return ReservationViewHolder(view, listener)
     }
 
+
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
         holder.bindData()
 
@@ -43,6 +45,9 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
             "Viaje N° ",
             reservations[position].round.toString()
         )*/
+
+
+
         holder.schedule_txt?.text = context.resources.getString(
             R.string.two_format_string,
             "",
@@ -114,6 +119,7 @@ class ReservationAdapter(var user:String, var userReservations:ArrayList<Reserva
             Log.d("USER","SI ESTA")
 
         } else {
+            holder.id_txt_cupo?.visibility=View.VISIBLE
             holder.buttonrsv?.text=context.resources.getString(R.string.reservar_btn)
             holder.image?.setColorFilter(Color.argb(150, 155, 155, 155),   PorterDuff.Mode.SRC_ATOP)
             holder.buttonrsv?.background?.setColorFilter(Color.parseColor("#46B64B"), PorterDuff.Mode.SRC_ATOP)

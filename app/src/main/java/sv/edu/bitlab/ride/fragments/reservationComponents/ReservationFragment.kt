@@ -101,14 +101,17 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
           Log.d("CONNECTION","hay conexion")
 
       }else {
-          Log.d("CONNECTION", "No hay conexion")
-          var animacion = fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml)
-          animacion?.visibility = View.GONE
+
+          Log.d("CONNECTION","No hay conexion")
+          var animacion =fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml)
+          animacion?.visibility=View.GONE
+
 
 
           //moises animation pending
           //var animacion2 =fragmentView?.findViewById<ConstraintLayout>(R.id.lottie_connection)
-          //  animacion2?.visibility=View.VISIBLE
+        //  animacion2?.visibility=View.VISIBLE
+
       }
         getAllReservations()
         getActiveReservation()
@@ -230,7 +233,7 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
     fun writeFirstRoundOfDay(){
         val reservationOfDay = Reservation(true,today_date,"",
-            RESERVATION_MAX_CAPACITY,1,"7:00AM-9:00AM","available")
+            RESERVATION_MAX_CAPACITY,1,"7:00PM-9:00AM","available")
         firestoredb.child("$today_date/rounds").push().setValue(reservationOfDay)
     }
     fun writeNewRound(){
@@ -250,8 +253,9 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
 
               //  fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.GONE
               // fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.VISIBLE
+
                 pushReservation()
-                subscribe(round)
+               // subscribe(round)
 
             }
             .setNegativeButton("Cancelar") { _, _ ->
@@ -332,13 +336,14 @@ class ReservationFragment : Fragment(), ReservationViewHolder.ReservationItemLis
                 val state= snap?.users?.any { x->x.contains(user.email!!)}
 
                 if (state!!){
-
+                    subscribe(snap.round.toString())
                     fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.GONE
                     fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.VISIBLE
                     Snackbar.make(requireView(), "Reservation added successfully", Snackbar.LENGTH_LONG)
                         .setAction("Ok") {  }.show()
 
                 }else{
+                    unsubscribe(snap.round.toString())
                      fragmentView?.findViewById<RecyclerView>(R.id.recyclerview_reservation)?.visibility=View.GONE
                     fragmentView?.findViewById<ConstraintLayout>(R.id.animation_xml_transcation)?.visibility=View.VISIBLE
                     pushReservation()
