@@ -23,7 +23,7 @@ class RecordViewHolder(itemView: View, val listener: RecordItemListener) : Recyc
     fun bindData() {
 
 
-        date_txt=itemView.history_date_txt
+
 
 
       //testing

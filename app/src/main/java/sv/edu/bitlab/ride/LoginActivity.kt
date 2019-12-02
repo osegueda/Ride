@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -20,7 +22,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.core.Tag
 import com.google.firebase.firestore.FirebaseFirestore
 import sv.edu.bitlab.ride.models.User
-import sv.edu.bitlab.ride.models.Usuario
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,7 +33,12 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+        window.statusBarColor = Color.TRANSPARENT
+        setContentView(R.layout.login_activity_new)
 
         val loginbtn = findViewById<View>(R.id.btn_login)
 
